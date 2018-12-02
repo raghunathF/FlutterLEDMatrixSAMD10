@@ -598,10 +598,10 @@ static inline void i2c_slave_get_config_defaults(
 	config->pinmux_pad1 = PINMUX_DEFAULT;
 	config->scl_low_timeout  = false;
 #ifdef FEATURE_I2C_SCL_STRETCH_MODE
-	config->scl_stretch_only_after_ack_bit = false;
+	config->scl_stretch_only_after_ack_bit = true;
 #endif
 #ifdef FEATURE_I2C_SCL_EXTEND_TIMEOUT
-	config->slave_scl_low_extend_timeout   = false;
+	config->slave_scl_low_extend_timeout   = true;
 #endif
 }
 

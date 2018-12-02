@@ -114,7 +114,27 @@ src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.d \
  ../src/ASF/sam0/drivers/system/interrupt/system_interrupt_samd10_d11/system_interrupt_features.h \
  ../src/ASF/sam0/drivers/sercom/sercom_pinout.h \
  ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h \
- ../src/ASF/sam0/drivers/sercom/sercom.h
+ ../src/ASF/sam0/drivers/sercom/sercom.h ../src/asf.h \
+ ../src/ASF/sam0/drivers/adc/adc.h \
+ ../src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_feature.h \
+ ../src/ASF/sam0/drivers/adc/adc_callback.h \
+ ../src/ASF/common2/boards/user_board/user_board.h \
+ ../src/config/confFlutterBoard.h ../src/ASF/sam0/drivers/dma/dma.h \
+ ../src/config/conf_dma.h ../src/ASF/sam0/drivers/dma/dma_crc.h \
+ ../src/ASF/common2/services/delay/delay.h \
+ ../src/ASF/common2/services/delay/sam0/systick_counter.h \
+ ../src/ASF/common/boards/board.h ../src/ASF/sam0/drivers/port/port.h \
+ ../src/ASF/sam0/drivers/sercom/i2c/i2c_common.h \
+ ../src/ASF/sam0/drivers/sercom/i2c/i2c_slave.h \
+ ../src/ASF/sam0/drivers/sercom/spi/spi.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_locale.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
+ ../src/config/conf_spi.h \
+ ../src/ASF/sam0/drivers/sercom/spi/spi_interrupt.h \
+ ../src/ASF/sam0/drivers/sercom/spi/spi.h ../src/ASF/sam0/drivers/tc/tc.h \
+ ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
+ ../src/ASF/sam0/drivers/tc/tc.h
 
 ../src/ASF/sam0/drivers/sercom/i2c/i2c_slave_interrupt.h:
 
@@ -345,3 +365,53 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h:
 
 ../src/ASF/sam0/drivers/sercom/sercom.h:
+
+../src/asf.h:
+
+../src/ASF/sam0/drivers/adc/adc.h:
+
+../src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_feature.h:
+
+../src/ASF/sam0/drivers/adc/adc_callback.h:
+
+../src/ASF/common2/boards/user_board/user_board.h:
+
+../src/config/confFlutterBoard.h:
+
+../src/ASF/sam0/drivers/dma/dma.h:
+
+../src/config/conf_dma.h:
+
+../src/ASF/sam0/drivers/dma/dma_crc.h:
+
+../src/ASF/common2/services/delay/delay.h:
+
+../src/ASF/common2/services/delay/sam0/systick_counter.h:
+
+../src/ASF/common/boards/board.h:
+
+../src/ASF/sam0/drivers/port/port.h:
+
+../src/ASF/sam0/drivers/sercom/i2c/i2c_common.h:
+
+../src/ASF/sam0/drivers/sercom/i2c/i2c_slave.h:
+
+../src/ASF/sam0/drivers/sercom/spi/spi.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\_locale.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
+
+../src/config/conf_spi.h:
+
+../src/ASF/sam0/drivers/sercom/spi/spi_interrupt.h:
+
+../src/ASF/sam0/drivers/sercom/spi/spi.h:
+
+../src/ASF/sam0/drivers/tc/tc.h:
+
+../src/ASF/sam0/drivers/tc/tc_interrupt.h:
+
+../src/ASF/sam0/drivers/tc/tc.h:

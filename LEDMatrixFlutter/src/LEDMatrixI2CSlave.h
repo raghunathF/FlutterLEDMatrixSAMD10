@@ -12,7 +12,7 @@
 
 void configure_i2c_slave(void);
 void configure_i2c_slave_callbacks(void);
-
+void i2c_update_sensors_values();
 
 
 

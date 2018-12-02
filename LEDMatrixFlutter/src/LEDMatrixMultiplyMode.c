@@ -19,8 +19,8 @@ volatile uint8_t maxCThresh[13];
 
 static uint8_t LEDArray[18];
 
-extern uint8_t useDialLValue ;
-extern uint8_t useDialRValue ;
+extern  volatile uint8_t dialOutputs[2];
+
 
 
 #define THRESHOLD2_MIN_0	0
@@ -132,8 +132,8 @@ uint8_t filterDialMulMode(uint8_t dialValue , uint8_t RC )
 
 void convertDialMulMode()
 {
-	filterDialMulMode(useDialLValue , UPDATE_THRESH_ROW);
-	filterDialMulMode(useDialRValue , UPDATE_THRESH_COLUMN);
+	filterDialMulMode(dialOutputs[0] , UPDATE_THRESH_ROW);
+	filterDialMulMode(dialOutputs[1] , UPDATE_THRESH_COLUMN);
 }
 
 

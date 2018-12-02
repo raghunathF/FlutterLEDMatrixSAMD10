@@ -36,6 +36,7 @@ Common symbol       size              file
 
 example_descriptor  0x10              src/LEDMatrixSPIMaster.o
 descriptor_section  0x50              src/ASF/sam0/drivers/dma/dma.o
+packet              0x8               src/LEDMatrixI2CSlave.o
 minCThresh          0xd               src/LEDMatrixMultiplyMode.o
 errno               0x4               c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-reent.o)
 DMASourceRegister   0xd               src/main.o
@@ -50,10 +51,10 @@ I2CReadBuffer       0x37              src/main.o
 maxCThresh          0xd               src/LEDMatrixMultiplyMode.o
 tcLEDMatrix         0x1c              src/LEDMatrixControl.o
 GMatrix             0x20              src/main.o
+rd_packet           0x8               src/LEDMatrixI2CSlave.o
 _adc_instances      0x4               src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
 spi_master_instance
                     0x3c              src/LEDMatrixSPIMaster.o
-testLogDialL        0x3e8             src/LEDMatrixReadDial.o
 dialOutputs         0x2               src/main.o
 adc_instance        0x20              src/LEDMatrixReadDial.o
 minRThresh          0xd               src/LEDMatrixMultiplyMode.o
@@ -172,6 +173,8 @@ Discarded input sections
  .text          0x00000000        0x0 src/ASF/common2/services/delay/sam0/systick_counter.o
  .data          0x00000000        0x0 src/ASF/common2/services/delay/sam0/systick_counter.o
  .bss           0x00000000        0x0 src/ASF/common2/services/delay/sam0/systick_counter.o
+ .text.delay_cycles_ms
+                0x00000000       0x2c src/ASF/common2/services/delay/sam0/systick_counter.o
  .bss.cpu_irq_critical_section_counter
                 0x00000000        0x4 src/ASF/common2/services/delay/sam0/systick_counter.o
  .bss.cpu_irq_prev_interrupt_state
@@ -1126,6 +1129,18 @@ Discarded input sections
  .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
  .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
  .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
  .text          0x00000000        0x0 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
  .data          0x00000000        0x0 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
  .bss           0x00000000        0x0 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
@@ -1241,6 +1256,9 @@ Discarded input sections
  .debug_macro   0x00000000       0x10 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
  .debug_macro   0x00000000       0x27 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
  .debug_macro   0x00000000       0x40 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x00000000       0x19 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x00000000       0x10 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x00000000       0x16 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
  .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/sercom.o
  .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/sercom.o
  .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/sercom.o
@@ -1883,6 +1901,8 @@ Discarded input sections
  .debug_macro   0x00000000       0x2e src/ASF/sam0/drivers/sercom/spi/spi.o
  .debug_macro   0x00000000       0x5e src/ASF/sam0/drivers/sercom/spi/spi.o
  .debug_macro   0x00000000       0x10 src/ASF/sam0/drivers/sercom/spi/spi.o
+ .debug_macro   0x00000000       0x16 src/ASF/sam0/drivers/sercom/spi/spi.o
+ .debug_macro   0x00000000       0x16 src/ASF/sam0/drivers/sercom/spi/spi.o
  .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
  .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
  .group         0x00000000        0x8 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
@@ -2949,13 +2969,20 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x2e src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x19 src/ASF/common2/boards/user_board/init.o
+ .debug_macro   0x00000000       0x76 src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x10 src/ASF/common2/boards/user_board/init.o
+ .debug_macro   0x00000000       0x10 src/ASF/common2/boards/user_board/init.o
+ .debug_macro   0x00000000       0x1c src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x16 src/ASF/common2/boards/user_board/init.o
+ .debug_macro   0x00000000      0x2c6 src/ASF/common2/boards/user_board/init.o
+ .debug_macro   0x00000000       0x11 src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x5e src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x10 src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x40 src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x16 src/ASF/common2/boards/user_board/init.o
  .debug_macro   0x00000000       0x16 src/ASF/common2/boards/user_board/init.o
+ .debug_macro   0x00000000       0x2e src/ASF/common2/boards/user_board/init.o
+ .debug_macro   0x00000000       0x6c src/ASF/common2/boards/user_board/init.o
  .group         0x00000000        0x8 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
  .group         0x00000000        0x8 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
  .group         0x00000000        0x8 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -4880,8 +4907,6 @@ Discarded input sections
  .text          0x00000000        0x0 src/LEDMatrixControl.o
  .data          0x00000000        0x0 src/LEDMatrixControl.o
  .bss           0x00000000        0x0 src/LEDMatrixControl.o
- .text.testPinsInit
-                0x00000000       0x20 src/LEDMatrixControl.o
  .bss.cpu_irq_critical_section_counter
                 0x00000000        0x4 src/LEDMatrixControl.o
  .bss.cpu_irq_prev_interrupt_state
@@ -5117,6 +5142,10 @@ Discarded input sections
  .text          0x00000000        0x0 src/LEDMatrixI2CSlave.o
  .data          0x00000000        0x0 src/LEDMatrixI2CSlave.o
  .bss           0x00000000        0x0 src/LEDMatrixI2CSlave.o
+ .text.i2c_write_complete_callback
+                0x00000000        0xc src/LEDMatrixI2CSlave.o
+ .text.i2c_error_handler_callback
+                0x00000000       0x24 src/LEDMatrixI2CSlave.o
  .bss.cpu_irq_critical_section_counter
                 0x00000000        0x4 src/LEDMatrixI2CSlave.o
  .bss.cpu_irq_prev_interrupt_state
@@ -6305,14 +6334,10 @@ Discarded input sections
  .text          0x00000000        0x0 src/LEDMatrixUtilities.o
  .data          0x00000000        0x0 src/LEDMatrixUtilities.o
  .bss           0x00000000        0x0 src/LEDMatrixUtilities.o
- .text.testFunction
-                0x00000000       0x24 src/LEDMatrixUtilities.o
  .bss.cpu_irq_critical_section_counter
                 0x00000000        0x4 src/LEDMatrixUtilities.o
  .bss.cpu_irq_prev_interrupt_state
                 0x00000000        0x1 src/LEDMatrixUtilities.o
- .data.matrixData.12484
-                0x00000000       0x12 src/LEDMatrixUtilities.o
  .debug_macro   0x00000000      0x8c2 src/LEDMatrixUtilities.o
  .debug_macro   0x00000000      0x16d src/LEDMatrixUtilities.o
  .debug_macro   0x00000000      0x64b src/LEDMatrixUtilities.o
@@ -6546,10 +6571,16 @@ Discarded input sections
  .data          0x00000000        0x0 src/main.o
  .bss           0x00000000        0x0 src/main.o
  .text.test     0x00000000       0x98 src/main.o
+ .bss.I2CWriteComplete
+                0x00000000        0x1 src/main.o
  .bss.cpu_irq_critical_section_counter
                 0x00000000        0x4 src/main.o
  .bss.cpu_irq_prev_interrupt_state
                 0x00000000        0x1 src/main.o
+ .bss.useDialLValue
+                0x00000000        0x2 src/main.o
+ .bss.useDialRValue
+                0x00000000        0x2 src/main.o
  .debug_macro   0x00000000      0x8c2 src/main.o
  .debug_macro   0x00000000      0x16d src/main.o
  .debug_macro   0x00000000      0x64b src/main.o
@@ -6796,7 +6827,7 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtn.o
                 0x00000400                STACK_SIZE = DEFINED (STACK_SIZE)?STACK_SIZE:DEFINED (__stack_size__)?__stack_size__:0x400
 
-.text           0x00000000     0x3464
+.text           0x00000000     0x34d0
                 0x00000000                . = ALIGN (0x4)
                 0x00000000                _sfixed = .
  *(.vectors .vectors.*)
@@ -6810,437 +6841,440 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
  .text.delay_cycles_us
                 0x0000012c       0x2c src/ASF/common2/services/delay/sam0/systick_counter.o
                 0x0000012c                delay_cycles_us
- .text.delay_cycles_ms
-                0x00000158       0x2c src/ASF/common2/services/delay/sam0/systick_counter.o
-                0x00000158                delay_cycles_ms
  .text.adc_get_config_defaults
-                0x00000184       0x46 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
-                0x00000184                adc_get_config_defaults
- *fill*         0x000001ca        0x2 
+                0x00000158       0x46 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
+                0x00000158                adc_get_config_defaults
+ *fill*         0x0000019e        0x2 
  .text.adc_init
-                0x000001cc      0x428 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
-                0x000001cc                adc_init
+                0x000001a0      0x428 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
+                0x000001a0                adc_init
  .text.ADC_Handler
-                0x000005f4       0xc0 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
-                0x000005f4                ADC_Handler
+                0x000005c8       0xc0 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
+                0x000005c8                ADC_Handler
  .text.DMAC_Handler
-                0x000006b4       0xb4 src/ASF/sam0/drivers/dma/dma.o
-                0x000006b4                DMAC_Handler
+                0x00000688       0xb4 src/ASF/sam0/drivers/dma/dma.o
+                0x00000688                DMAC_Handler
  .text.dma_get_config_defaults
-                0x00000768       0x10 src/ASF/sam0/drivers/dma/dma.o
-                0x00000768                dma_get_config_defaults
+                0x0000073c       0x10 src/ASF/sam0/drivers/dma/dma.o
+                0x0000073c                dma_get_config_defaults
  .text.dma_allocate
-                0x00000778      0x148 src/ASF/sam0/drivers/dma/dma.o
-                0x00000778                dma_allocate
+                0x0000074c      0x148 src/ASF/sam0/drivers/dma/dma.o
+                0x0000074c                dma_allocate
  .text.dma_start_transfer_job
-                0x000008c0       0x88 src/ASF/sam0/drivers/dma/dma.o
-                0x000008c0                dma_start_transfer_job
+                0x00000894       0x88 src/ASF/sam0/drivers/dma/dma.o
+                0x00000894                dma_start_transfer_job
  .text.dma_descriptor_create
-                0x00000948       0xa8 src/ASF/sam0/drivers/dma/dma.o
-                0x00000948                dma_descriptor_create
+                0x0000091c       0xa8 src/ASF/sam0/drivers/dma/dma.o
+                0x0000091c                dma_descriptor_create
  .text.dma_add_descriptor
-                0x000009f0       0x2a src/ASF/sam0/drivers/dma/dma.o
-                0x000009f0                dma_add_descriptor
- *fill*         0x00000a1a        0x2 
+                0x000009c4       0x2a src/ASF/sam0/drivers/dma/dma.o
+                0x000009c4                dma_add_descriptor
+ *fill*         0x000009ee        0x2 
  .text.i2c_slave_init
-                0x00000a1c      0x190 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave.o
-                0x00000a1c                i2c_slave_init
+                0x000009f0      0x190 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave.o
+                0x000009f0                i2c_slave_init
  .text.i2c_slave_register_callback
-                0x00000bac       0x1a src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
-                0x00000bac                i2c_slave_register_callback
+                0x00000b80       0x1a src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+                0x00000b80                i2c_slave_register_callback
  .text.i2c_slave_read_packet_job
-                0x00000bc6       0x28 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
-                0x00000bc6                i2c_slave_read_packet_job
+                0x00000b9a       0x28 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+                0x00000b9a                i2c_slave_read_packet_job
  .text.i2c_slave_write_packet_job
-                0x00000bee       0x28 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
-                0x00000bee                i2c_slave_write_packet_job
- *fill*         0x00000c16        0x2 
+                0x00000bc2       0x28 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+                0x00000bc2                i2c_slave_write_packet_job
+ *fill*         0x00000bea        0x2 
  .text._i2c_slave_interrupt_handler
-                0x00000c18      0x280 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
-                0x00000c18                _i2c_slave_interrupt_handler
+                0x00000bec      0x280 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+                0x00000bec                _i2c_slave_interrupt_handler
  .text._sercom_get_sync_baud_val
-                0x00000e98       0x28 src/ASF/sam0/drivers/sercom/sercom.o
-                0x00000e98                _sercom_get_sync_baud_val
+                0x00000e6c       0x28 src/ASF/sam0/drivers/sercom/sercom.o
+                0x00000e6c                _sercom_get_sync_baud_val
  .text.sercom_set_gclk_generator
-                0x00000ec0       0x4c src/ASF/sam0/drivers/sercom/sercom.o
-                0x00000ec0                sercom_set_gclk_generator
+                0x00000e94       0x4c src/ASF/sam0/drivers/sercom/sercom.o
+                0x00000e94                sercom_set_gclk_generator
  .text._sercom_get_default_pad
-                0x00000f0c       0xc0 src/ASF/sam0/drivers/sercom/sercom.o
-                0x00000f0c                _sercom_get_default_pad
+                0x00000ee0       0xc0 src/ASF/sam0/drivers/sercom/sercom.o
+                0x00000ee0                _sercom_get_default_pad
  .text._sercom_get_sercom_inst_index
-                0x00000fcc       0x38 src/ASF/sam0/drivers/sercom/sercom.o
-                0x00000fcc                _sercom_get_sercom_inst_index
+                0x00000fa0       0x38 src/ASF/sam0/drivers/sercom/sercom.o
+                0x00000fa0                _sercom_get_sercom_inst_index
  .text._sercom_default_handler
-                0x00001004        0x2 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
- *fill*         0x00001006        0x2 
+                0x00000fd8        0x2 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+ *fill*         0x00000fda        0x2 
  .text._sercom_set_handler
-                0x00001008       0x3c src/ASF/sam0/drivers/sercom/sercom_interrupt.o
-                0x00001008                _sercom_set_handler
+                0x00000fdc       0x3c src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+                0x00000fdc                _sercom_set_handler
  .text._sercom_get_interrupt_vector
-                0x00001044       0x20 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
-                0x00001044                _sercom_get_interrupt_vector
+                0x00001018       0x20 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+                0x00001018                _sercom_get_interrupt_vector
  .text.SERCOM0_Handler
-                0x00001064       0x10 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
-                0x00001064                SERCOM0_Handler
+                0x00001038       0x10 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+                0x00001038                SERCOM0_Handler
  .text.SERCOM1_Handler
-                0x00001074       0x10 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
-                0x00001074                SERCOM1_Handler
+                0x00001048       0x10 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+                0x00001048                SERCOM1_Handler
  .text.SERCOM2_Handler
-                0x00001084       0x10 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
-                0x00001084                SERCOM2_Handler
+                0x00001058       0x10 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+                0x00001058                SERCOM2_Handler
  .text.spi_init
-                0x00001094      0x214 src/ASF/sam0/drivers/sercom/spi/spi.o
-                0x00001094                spi_init
+                0x00001068      0x214 src/ASF/sam0/drivers/sercom/spi/spi.o
+                0x00001068                spi_init
  .text._spi_interrupt_handler
-                0x000012a8      0x224 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
-                0x000012a8                _spi_interrupt_handler
+                0x0000127c      0x224 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
+                0x0000127c                _spi_interrupt_handler
  .text._tc_get_inst_index
-                0x000014cc       0x24 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
-                0x000014cc                _tc_get_inst_index
- .text.tc_init  0x000014f0      0x230 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
-                0x000014f0                tc_init
+                0x000014a0       0x24 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
+                0x000014a0                _tc_get_inst_index
+ .text.tc_init  0x000014c4      0x230 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
+                0x000014c4                tc_init
  .text.tc_register_callback
-                0x00001720       0x32 src/ASF/sam0/drivers/tc/tc_interrupt.o
-                0x00001720                tc_register_callback
- *fill*         0x00001752        0x2 
+                0x000016f4       0x32 src/ASF/sam0/drivers/tc/tc_interrupt.o
+                0x000016f4                tc_register_callback
+ *fill*         0x00001726        0x2 
  .text._tc_interrupt_handler
-                0x00001754       0x64 src/ASF/sam0/drivers/tc/tc_interrupt.o
-                0x00001754                _tc_interrupt_handler
+                0x00001728       0x64 src/ASF/sam0/drivers/tc/tc_interrupt.o
+                0x00001728                _tc_interrupt_handler
  .text.TC1_Handler
-                0x000017b8       0x10 src/ASF/sam0/drivers/tc/tc_interrupt.o
-                0x000017b8                TC1_Handler
+                0x0000178c       0x10 src/ASF/sam0/drivers/tc/tc_interrupt.o
+                0x0000178c                TC1_Handler
  .text.TC2_Handler
-                0x000017c8       0x10 src/ASF/sam0/drivers/tc/tc_interrupt.o
-                0x000017c8                TC2_Handler
+                0x0000179c       0x10 src/ASF/sam0/drivers/tc/tc_interrupt.o
+                0x0000179c                TC2_Handler
  .text.port_pin_set_config
-                0x000017d8       0x24 src/ASF/sam0/drivers/port/port.o
-                0x000017d8                port_pin_set_config
+                0x000017ac       0x24 src/ASF/sam0/drivers/port/port.o
+                0x000017ac                port_pin_set_config
  .text.system_board_init
-                0x000017fc        0x2 src/ASF/common2/boards/user_board/init.o
-                0x000017fc                board_init
-                0x000017fc                system_board_init
- *fill*         0x000017fe        0x2 
+                0x000017d0        0x2 src/ASF/common2/boards/user_board/init.o
+                0x000017d0                board_init
+                0x000017d0                system_board_init
+ *fill*         0x000017d2        0x2 
  .text.cpu_irq_enter_critical
-                0x00001800       0x40 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
-                0x00001800                cpu_irq_enter_critical
+                0x000017d4       0x40 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+                0x000017d4                cpu_irq_enter_critical
  .text.cpu_irq_leave_critical
-                0x00001840       0x30 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
-                0x00001840                cpu_irq_leave_critical
+                0x00001814       0x30 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+                0x00001814                cpu_irq_leave_critical
  .text.system_clock_source_get_hz
-                0x00001870       0x90 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
-                0x00001870                system_clock_source_get_hz
+                0x00001844       0x90 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+                0x00001844                system_clock_source_get_hz
  .text.system_clock_source_osc8m_set_config
-                0x00001900       0x3c src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
-                0x00001900                system_clock_source_osc8m_set_config
+                0x000018d4       0x3c src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+                0x000018d4                system_clock_source_osc8m_set_config
  .text.system_clock_source_osc32k_set_config
-                0x0000193c       0x7c src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
-                0x0000193c                system_clock_source_osc32k_set_config
+                0x00001910       0x7c src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+                0x00001910                system_clock_source_osc32k_set_config
  .text.system_clock_source_dfll_set_config
-                0x000019b8       0x80 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
-                0x000019b8                system_clock_source_dfll_set_config
+                0x0000198c       0x80 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+                0x0000198c                system_clock_source_dfll_set_config
  .text.system_clock_source_enable
-                0x00001a38       0xa8 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
-                0x00001a38                system_clock_source_enable
+                0x00001a0c       0xa8 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+                0x00001a0c                system_clock_source_enable
  .text.system_clock_init
-                0x00001ae0      0x17c src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
-                0x00001ae0                system_clock_init
+                0x00001ab4      0x17c src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+                0x00001ab4                system_clock_init
  .text.system_gclk_init
-                0x00001c5c       0x24 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
-                0x00001c5c                system_gclk_init
+                0x00001c30       0x24 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
+                0x00001c30                system_gclk_init
  .text.system_gclk_gen_set_config
-                0x00001c80       0xb8 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
-                0x00001c80                system_gclk_gen_set_config
+                0x00001c54       0xb8 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
+                0x00001c54                system_gclk_gen_set_config
  .text.system_gclk_gen_enable
-                0x00001d38       0x44 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
-                0x00001d38                system_gclk_gen_enable
+                0x00001d0c       0x44 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
+                0x00001d0c                system_gclk_gen_enable
  .text.system_gclk_gen_get_hz
-                0x00001d7c       0x8c src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
-                0x00001d7c                system_gclk_gen_get_hz
+                0x00001d50       0x8c src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
+                0x00001d50                system_gclk_gen_get_hz
  .text.system_gclk_chan_enable
-                0x00001e08       0x30 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
-                0x00001e08                system_gclk_chan_enable
+                0x00001ddc       0x30 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
+                0x00001ddc                system_gclk_chan_enable
  .text.system_gclk_chan_disable
-                0x00001e38       0x5c src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
-                0x00001e38                system_gclk_chan_disable
+                0x00001e0c       0x5c src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
+                0x00001e0c                system_gclk_chan_disable
  .text.system_gclk_chan_set_config
-                0x00001e94       0x1c src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
-                0x00001e94                system_gclk_chan_set_config
+                0x00001e68       0x1c src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
+                0x00001e68                system_gclk_chan_set_config
  .text.system_gclk_chan_get_hz
-                0x00001eb0       0x34 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
-                0x00001eb0                system_gclk_chan_get_hz
+                0x00001e84       0x34 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
+                0x00001e84                system_gclk_chan_get_hz
  .text._system_pinmux_config
-                0x00001ee4       0xa8 src/ASF/sam0/drivers/system/pinmux/pinmux.o
+                0x00001eb8       0xa8 src/ASF/sam0/drivers/system/pinmux/pinmux.o
  .text.system_pinmux_pin_set_config
-                0x00001f8c       0x30 src/ASF/sam0/drivers/system/pinmux/pinmux.o
-                0x00001f8c                system_pinmux_pin_set_config
+                0x00001f60       0x30 src/ASF/sam0/drivers/system/pinmux/pinmux.o
+                0x00001f60                system_pinmux_pin_set_config
  .text._system_dummy_init
-                0x00001fbc        0x2 src/ASF/sam0/drivers/system/system.o
-                0x00001fbc                _system_extint_init
-                0x00001fbc                _system_events_init
-                0x00001fbc                _system_dummy_init
-                0x00001fbc                _system_divas_init
- *fill*         0x00001fbe        0x2 
+                0x00001f90        0x2 src/ASF/sam0/drivers/system/system.o
+                0x00001f90                _system_extint_init
+                0x00001f90                _system_events_init
+                0x00001f90                _system_dummy_init
+                0x00001f90                _system_divas_init
+ *fill*         0x00001f92        0x2 
  .text.system_init
-                0x00001fc0       0x2c src/ASF/sam0/drivers/system/system.o
-                0x00001fc0                system_init
+                0x00001f94       0x2c src/ASF/sam0/drivers/system/system.o
+                0x00001f94                system_init
  .text.Dummy_Handler
-                0x00001fec        0x2 src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
-                0x00001fec                HardFault_Handler
-                0x00001fec                AC_Handler
-                0x00001fec                SysTick_Handler
-                0x00001fec                PendSV_Handler
-                0x00001fec                NMI_Handler
-                0x00001fec                TCC0_Handler
-                0x00001fec                RTC_Handler
-                0x00001fec                EIC_Handler
-                0x00001fec                WDT_Handler
-                0x00001fec                Dummy_Handler
-                0x00001fec                PM_Handler
-                0x00001fec                SVC_Handler
-                0x00001fec                EVSYS_Handler
-                0x00001fec                NVMCTRL_Handler
-                0x00001fec                DAC_Handler
-                0x00001fec                PTC_Handler
-                0x00001fec                SYSCTRL_Handler
- *fill*         0x00001fee        0x2 
+                0x00001fc0        0x2 src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
+                0x00001fc0                HardFault_Handler
+                0x00001fc0                AC_Handler
+                0x00001fc0                SysTick_Handler
+                0x00001fc0                PendSV_Handler
+                0x00001fc0                NMI_Handler
+                0x00001fc0                TCC0_Handler
+                0x00001fc0                RTC_Handler
+                0x00001fc0                EIC_Handler
+                0x00001fc0                WDT_Handler
+                0x00001fc0                Dummy_Handler
+                0x00001fc0                PM_Handler
+                0x00001fc0                SVC_Handler
+                0x00001fc0                EVSYS_Handler
+                0x00001fc0                NVMCTRL_Handler
+                0x00001fc0                DAC_Handler
+                0x00001fc0                PTC_Handler
+                0x00001fc0                SYSCTRL_Handler
+ *fill*         0x00001fc2        0x2 
  .text.Reset_Handler
-                0x00001ff0       0xd0 src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
-                0x00001ff0                Reset_Handler
- .text._sbrk    0x000020c0       0x24 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
-                0x000020c0                _sbrk
+                0x00001fc4       0xd0 src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
+                0x00001fc4                Reset_Handler
+ .text._sbrk    0x00002094       0x24 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+                0x00002094                _sbrk
  .text.updateBluetoothMode
-                0x000020e4       0x38 src/LEDMatrixBluetoothMode.o
-                0x000020e4                updateBluetoothMode
+                0x000020b8       0x38 src/LEDMatrixBluetoothMode.o
+                0x000020b8                updateBluetoothMode
  .text.updateLEDMatrix
-                0x0000211c       0x18 src/LEDMatrixControl.o
-                0x0000211c                updateLEDMatrix
+                0x000020f0        0xc src/LEDMatrixControl.o
+                0x000020f0                updateLEDMatrix
+ .text.testPinsInit
+                0x000020fc       0x20 src/LEDMatrixControl.o
+                0x000020fc                testPinsInit
  .text.updateSPIValues
-                0x00002134       0x7c src/LEDMatrixControl.o
-                0x00002134                updateSPIValues
+                0x0000211c       0x7c src/LEDMatrixControl.o
+                0x0000211c                updateSPIValues
  .text.initLEDMatrixTimer
-                0x000021b0       0x70 src/LEDMatrixControl.o
-                0x000021b0                initLEDMatrixTimer
+                0x00002198       0x70 src/LEDMatrixControl.o
+                0x00002198                initLEDMatrixTimer
  .text.initLEDMatrixTimerCallbacks
-                0x00002220       0x4c src/LEDMatrixControl.o
-                0x00002220                initLEDMatrixTimerCallbacks
+                0x00002208       0x4c src/LEDMatrixControl.o
+                0x00002208                initLEDMatrixTimerCallbacks
  .text.initMatrixStandbyMode
-                0x0000226c       0x10 src/LEDMatrixControl.o
-                0x0000226c                initMatrixStandbyMode
+                0x00002254       0x10 src/LEDMatrixControl.o
+                0x00002254                initMatrixStandbyMode
  .text.updateLEDMatrixArray
-                0x0000227c       0x20 src/LEDMatrixControl.o
-                0x0000227c                updateLEDMatrixArray
+                0x00002264       0x20 src/LEDMatrixControl.o
+                0x00002264                updateLEDMatrixArray
  .text.LEDMatrixControl
-                0x0000229c       0x70 src/LEDMatrixControl.o
-                0x0000229c                LEDMatrixControl
+                0x00002284       0x70 src/LEDMatrixControl.o
+                0x00002284                LEDMatrixControl
  .text.LEDMatrixTimerInit
-                0x0000230c       0x14 src/LEDMatrixControl.o
-                0x0000230c                LEDMatrixTimerInit
- .text.i2c_write_complete_callback
-                0x00002320        0xc src/LEDMatrixI2CSlave.o
-                0x00002320                i2c_write_complete_callback
+                0x000022f4       0x14 src/LEDMatrixControl.o
+                0x000022f4                LEDMatrixTimerInit
  .text.i2c_read_complete_callback
-                0x0000232c       0x24 src/LEDMatrixI2CSlave.o
-                0x0000232c                i2c_read_complete_callback
+                0x00002308       0x24 src/LEDMatrixI2CSlave.o
+                0x00002308                i2c_read_complete_callback
  .text.i2c_read_request_callback
-                0x00002350       0x40 src/LEDMatrixI2CSlave.o
-                0x00002350                i2c_read_request_callback
+                0x0000232c       0x40 src/LEDMatrixI2CSlave.o
+                0x0000232c                i2c_read_request_callback
  .text.i2c_write_request_callback
-                0x00002390       0x20 src/LEDMatrixI2CSlave.o
-                0x00002390                i2c_write_request_callback
+                0x0000236c       0x20 src/LEDMatrixI2CSlave.o
+                0x0000236c                i2c_write_request_callback
+ .text.i2c_update_sensors_values
+                0x0000238c        0xc src/LEDMatrixI2CSlave.o
+                0x0000238c                i2c_update_sensors_values
  .text.configure_i2c_slave
-                0x000023b0       0x94 src/LEDMatrixI2CSlave.o
-                0x000023b0                configure_i2c_slave
+                0x00002398       0xa0 src/LEDMatrixI2CSlave.o
+                0x00002398                configure_i2c_slave
  .text.configure_i2c_slave_callbacks
-                0x00002444       0x6c src/LEDMatrixI2CSlave.o
-                0x00002444                configure_i2c_slave_callbacks
+                0x00002438       0x58 src/LEDMatrixI2CSlave.o
+                0x00002438                configure_i2c_slave_callbacks
  .text.dialConvertValueRow
-                0x000024b0       0x7c src/LEDMatrixMultiplyMode.o
-                0x000024b0                dialConvertValueRow
+                0x00002490       0x7c src/LEDMatrixMultiplyMode.o
+                0x00002490                dialConvertValueRow
  .text.dialConvertValueColumn
-                0x0000252c       0x7c src/LEDMatrixMultiplyMode.o
-                0x0000252c                dialConvertValueColumn
+                0x0000250c       0x7c src/LEDMatrixMultiplyMode.o
+                0x0000250c                dialConvertValueColumn
  .text.convertDialMulMode
-                0x000025a8       0x24 src/LEDMatrixMultiplyMode.o
-                0x000025a8                convertDialMulMode
+                0x00002588       0x24 src/LEDMatrixMultiplyMode.o
+                0x00002588                convertDialMulMode
  .text.updateMatrixMultiplyMode
-                0x000025cc        0xc src/LEDMatrixMultiplyMode.o
-                0x000025cc                updateMatrixMultiplyMode
+                0x000025ac        0xc src/LEDMatrixMultiplyMode.o
+                0x000025ac                updateMatrixMultiplyMode
  .text.setupThresholds
-                0x000025d8       0x38 src/LEDMatrixMultiplyMode.o
-                0x000025d8                setupThresholds
+                0x000025b8       0x38 src/LEDMatrixMultiplyMode.o
+                0x000025b8                setupThresholds
  .text.initMatrixMultiplyMode
-                0x00002610        0xc src/LEDMatrixMultiplyMode.o
-                0x00002610                initMatrixMultiplyMode
+                0x000025f0        0xc src/LEDMatrixMultiplyMode.o
+                0x000025f0                initMatrixMultiplyMode
  .text.configADC
-                0x0000261c       0x84 src/LEDMatrixReadDial.o
-                0x0000261c                configADC
+                0x000025fc       0x84 src/LEDMatrixReadDial.o
+                0x000025fc                configADC
  .text.configDials
-                0x000026a0        0xc src/LEDMatrixReadDial.o
-                0x000026a0                configDials
+                0x00002680        0xc src/LEDMatrixReadDial.o
+                0x00002680                configDials
  .text.adc_start_read_result
-                0x000026ac       0xc0 src/LEDMatrixReadDial.o
-                0x000026ac                adc_start_read_result
+                0x0000268c       0xc0 src/LEDMatrixReadDial.o
+                0x0000268c                adc_start_read_result
  .text.filterDialValues
-                0x0000276c       0xe0 src/LEDMatrixReadDial.o
-                0x0000276c                filterDialValues
+                0x0000274c       0xf4 src/LEDMatrixReadDial.o
+                0x0000274c                filterDialValues
  .text.readDials
-                0x0000284c       0x60 src/LEDMatrixReadDial.o
-                0x0000284c                readDials
+                0x00002840       0xac src/LEDMatrixReadDial.o
+                0x00002840                readDials
  .text.resetShiftData
-                0x000028ac       0x1c src/LEDMatrixSPIControl.o
-                0x000028ac                resetShiftData
+                0x000028ec       0x1c src/LEDMatrixSPIControl.o
+                0x000028ec                resetShiftData
  .text.LEDMatrixSend
-                0x000028c8       0x38 src/LEDMatrixSPIControl.o
-                0x000028c8                LEDMatrixSend
+                0x00002908       0x38 src/LEDMatrixSPIControl.o
+                0x00002908                LEDMatrixSend
  .text.LEDMatrixPinInit
-                0x00002900       0x38 src/LEDMatrixSPIControl.o
-                0x00002900                LEDMatrixPinInit
+                0x00002940       0x38 src/LEDMatrixSPIControl.o
+                0x00002940                LEDMatrixPinInit
  .text.LEDMatrixInit
-                0x00002938       0x20 src/LEDMatrixSPIControl.o
-                0x00002938                LEDMatrixInit
+                0x00002978       0x20 src/LEDMatrixSPIControl.o
+                0x00002978                LEDMatrixInit
  .text.transfer_done
-                0x00002958        0xc src/LEDMatrixSPIMaster.o
+                0x00002998        0xc src/LEDMatrixSPIMaster.o
  .text.setUpDMAData
-                0x00002964       0x14 src/LEDMatrixSPIMaster.o
-                0x00002964                setUpDMAData
+                0x000029a4       0x14 src/LEDMatrixSPIMaster.o
+                0x000029a4                setUpDMAData
  .text.startTransferDMA
-                0x00002978       0x24 src/LEDMatrixSPIMaster.o
-                0x00002978                startTransferDMA
+                0x000029b8       0x24 src/LEDMatrixSPIMaster.o
+                0x000029b8                startTransferDMA
  .text.configureSPIMaster
-                0x0000299c       0xa4 src/LEDMatrixSPIMaster.o
-                0x0000299c                configureSPIMaster
+                0x000029dc       0xa4 src/LEDMatrixSPIMaster.o
+                0x000029dc                configureSPIMaster
  .text.setupDMA
-                0x00002a40       0x98 src/LEDMatrixSPIMaster.o
-                0x00002a40                setupDMA
+                0x00002a80       0x98 src/LEDMatrixSPIMaster.o
+                0x00002a80                setupDMA
  .text.SPIMasterInit
-                0x00002ad8       0x14 src/LEDMatrixSPIMaster.o
-                0x00002ad8                SPIMasterInit
+                0x00002b18       0x14 src/LEDMatrixSPIMaster.o
+                0x00002b18                SPIMasterInit
  .text.reverseByte
-                0x00002aec       0x48 src/LEDMatrixUtilities.o
-                0x00002aec                reverseByte
+                0x00002b2c       0x48 src/LEDMatrixUtilities.o
+                0x00002b2c                reverseByte
  .text.convertMatrix2Shift
-                0x00002b34      0x23c src/LEDMatrixUtilities.o
-                0x00002b34                convertMatrix2Shift
- .text.BBTLogo  0x00002d70       0xa0 src/LEDMatrixUtilities.o
-                0x00002d70                BBTLogo
- .text.main     0x00002e10       0x68 src/main.o
-                0x00002e10                main
- .text          0x00002e78      0x114 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m\libgcc.a(_udivsi3.o)
-                0x00002e78                __aeabi_uidiv
-                0x00002e78                __udivsi3
-                0x00002f84                __aeabi_uidivmod
- .text          0x00002f8c      0x1d4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m\libgcc.a(_divsi3.o)
-                0x00002f8c                __divsi3
-                0x00002f8c                __aeabi_idiv
-                0x00003158                __aeabi_idivmod
- .text          0x00003160        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m\libgcc.a(_dvmd_tls.o)
-                0x00003160                __aeabi_idiv0
-                0x00003160                __aeabi_ldiv0
+                0x00002b74      0x23c src/LEDMatrixUtilities.o
+                0x00002b74                convertMatrix2Shift
+ .text.testFunction
+                0x00002db0       0x24 src/LEDMatrixUtilities.o
+                0x00002db0                testFunction
+ .text.BBTLogo  0x00002dd4       0xa0 src/LEDMatrixUtilities.o
+                0x00002dd4                BBTLogo
+ .text.main     0x00002e74       0x70 src/main.o
+                0x00002e74                main
+ .text          0x00002ee4      0x114 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m\libgcc.a(_udivsi3.o)
+                0x00002ee4                __aeabi_uidiv
+                0x00002ee4                __udivsi3
+                0x00002ff0                __aeabi_uidivmod
+ .text          0x00002ff8      0x1d4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m\libgcc.a(_divsi3.o)
+                0x00002ff8                __divsi3
+                0x00002ff8                __aeabi_idiv
+                0x000031c4                __aeabi_idivmod
+ .text          0x000031cc        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m\libgcc.a(_dvmd_tls.o)
+                0x000031cc                __aeabi_idiv0
+                0x000031cc                __aeabi_ldiv0
  .text.__libc_init_array
-                0x00003164       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-init.o)
-                0x00003164                __libc_init_array
- .text.malloc   0x000031ac       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-malloc.o)
-                0x000031ac                malloc
- .text.memcpy   0x000031c0       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-memcpy-stub.o)
-                0x000031c0                memcpy
- .text.memset   0x000031d2       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-memset.o)
-                0x000031d2                memset
- *fill*         0x000031e2        0x2 
+                0x000031d0       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-init.o)
+                0x000031d0                __libc_init_array
+ .text.malloc   0x00003218       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-malloc.o)
+                0x00003218                malloc
+ .text.memcpy   0x0000322c       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-memcpy-stub.o)
+                0x0000322c                memcpy
+ .text.memset   0x0000323e       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-memset.o)
+                0x0000323e                memset
+ *fill*         0x0000324e        0x2 
  .text._malloc_r
-                0x000031e4       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-nano-mallocr.o)
-                0x000031e4                _malloc_r
- .text._sbrk_r  0x000032a0       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-sbrkr.o)
-                0x000032a0                _sbrk_r
+                0x00003250       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-nano-mallocr.o)
+                0x00003250                _malloc_r
+ .text._sbrk_r  0x0000330c       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-sbrkr.o)
+                0x0000330c                _sbrk_r
  .text.__malloc_lock
-                0x000032c4        0x2 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-mlock.o)
-                0x000032c4                __malloc_lock
+                0x00003330        0x2 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-mlock.o)
+                0x00003330                __malloc_lock
  .text.__malloc_unlock
-                0x000032c6        0x2 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-mlock.o)
-                0x000032c6                __malloc_unlock
+                0x00003332        0x2 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-mlock.o)
+                0x00003332                __malloc_unlock
  *(.glue_7t)
- .glue_7t       0x000032c8        0x0 linker stubs
+ .glue_7t       0x00003334        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x000032c8        0x0 linker stubs
+ .glue_7        0x00003334        0x0 linker stubs
  *(.rodata .rodata* .gnu.linkonce.r.*)
  .rodata.adc_init
-                0x000032c8       0xd4 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
- .rodata        0x0000339c       0x50 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
- .rodata        0x000033ec        0xc src/ASF/sam0/drivers/sercom/sercom.o
+                0x00003334       0xd4 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
+ .rodata        0x00003408       0x50 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
+ .rodata        0x00003458        0xc src/ASF/sam0/drivers/sercom/sercom.o
  .rodata.system_clock_source_get_hz
-                0x000033f8       0x24 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+                0x00003464       0x24 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
  .rodata.system_clock_source_enable
-                0x0000341c       0x24 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+                0x00003488       0x24 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
  .rodata.tc_interrupt_vectors.12390
-                0x00003440        0x2 src/LEDMatrixControl.o
+                0x000034ac        0x2 src/LEDMatrixControl.o
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00003444                . = ALIGN (0x4)
- *fill*         0x00003442        0x2 
+                0x000034b0                . = ALIGN (0x4)
+ *fill*         0x000034ae        0x2 
  *(.init)
- .init          0x00003444        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crti.o
-                0x00003444                _init
- .init          0x00003448        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtn.o
-                0x00003450                . = ALIGN (0x4)
-                0x00003450                __preinit_array_start = .
+ .init          0x000034b0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crti.o
+                0x000034b0                _init
+ .init          0x000034b4        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtn.o
+                0x000034bc                . = ALIGN (0x4)
+                0x000034bc                __preinit_array_start = .
  *(.preinit_array)
-                0x00003450                __preinit_array_end = .
-                0x00003450                . = ALIGN (0x4)
-                0x00003450                __init_array_start = .
+                0x000034bc                __preinit_array_end = .
+                0x000034bc                . = ALIGN (0x4)
+                0x000034bc                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x00003450        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
-                0x00003454                __init_array_end = .
-                0x00003454                . = ALIGN (0x4)
+ .init_array    0x000034bc        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
+                0x000034c0                __init_array_end = .
+                0x000034c0                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x00003454                . = ALIGN (0x4)
+                0x000034c0                . = ALIGN (0x4)
  *(.fini)
- .fini          0x00003454        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crti.o
-                0x00003454                _fini
- .fini          0x00003458        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtn.o
-                0x00003460                . = ALIGN (0x4)
-                0x00003460                __fini_array_start = .
+ .fini          0x000034c0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crti.o
+                0x000034c0                _fini
+ .fini          0x000034c4        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtn.o
+                0x000034cc                . = ALIGN (0x4)
+                0x000034cc                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x00003460        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
+ .fini_array    0x000034cc        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
  *(SORT(.fini_array.*))
-                0x00003464                __fini_array_end = .
+                0x000034d0                __fini_array_end = .
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x00003464                . = ALIGN (0x4)
-                0x00003464                _efixed = .
+                0x000034d0                . = ALIGN (0x4)
+                0x000034d0                _efixed = .
                 [!provide]                PROVIDE (__exidx_start, .)
 
-.vfp11_veneer   0x00003464        0x0
- .vfp11_veneer  0x00003464        0x0 linker stubs
+.vfp11_veneer   0x000034d0        0x0
+ .vfp11_veneer  0x000034d0        0x0 linker stubs
 
-.v4_bx          0x00003464        0x0
- .v4_bx         0x00003464        0x0 linker stubs
+.v4_bx          0x000034d0        0x0
+ .v4_bx         0x000034d0        0x0 linker stubs
 
-.iplt           0x00003464        0x0
- .iplt          0x00003464        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
+.iplt           0x000034d0        0x0
+ .iplt          0x000034d0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
 
-.eh_frame       0x00003464        0x0
- .eh_frame      0x00003464        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
+.eh_frame       0x000034d0        0x0
+ .eh_frame      0x000034d0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
 
-.rel.dyn        0x00003464        0x0
- .rel.iplt      0x00003464        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
+.rel.dyn        0x000034d0        0x0
+ .rel.iplt      0x000034d0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
 
-.jcr            0x00003464        0x0
- .jcr           0x00003464        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
+.jcr            0x000034d0        0x0
+ .jcr           0x000034d0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
 
-.igot.plt       0x00003464        0x0
- .igot.plt      0x00003464        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
+.igot.plt       0x000034d0        0x0
+ .igot.plt      0x000034d0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
                 [!provide]                PROVIDE (__exidx_end, .)
-                0x00003464                . = ALIGN (0x4)
-                0x00003464                _etext = .
+                0x000034d0                . = ALIGN (0x4)
+                0x000034d0                _etext = .
 
-.relocate       0x20000000      0x130 load address 0x00003464
+.relocate       0x20000000      0x144 load address 0x000034d0
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _srelocate = .
  *(.ramfunc .ramfunc.*)
@@ -7257,193 +7291,196 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x20000014                g_interrupt_enabled
  .data.prevLEDMatrixMode.12466
                 0x20000015        0x1 src/LEDMatrixControl.o
- .data.firstTime.12437
+ .data.firstTime.12441
                 0x20000016        0x1 src/LEDMatrixReadDial.o
  *fill*         0x20000017        0x1 
- .data.matrixDataBFrame1.12491
+ .data.matrixData.12484
                 0x20000018       0x12 src/LEDMatrixUtilities.o
  *fill*         0x2000002a        0x2 
- .data.matrixDataBFrame2.12494
+ .data.matrixDataBFrame1.12491
                 0x2000002c       0x12 src/LEDMatrixUtilities.o
  *fill*         0x2000003e        0x2 
- .data.matrixDataBFrame3.12497
+ .data.matrixDataBFrame2.12494
                 0x20000040       0x12 src/LEDMatrixUtilities.o
  *fill*         0x20000052        0x2 
- .data.matrixDataBFrame4.12500
+ .data.matrixDataBFrame3.12497
                 0x20000054       0x12 src/LEDMatrixUtilities.o
  *fill*         0x20000066        0x2 
- .data.matrixDataGFrame1.12490
+ .data.matrixDataBFrame4.12500
                 0x20000068       0x12 src/LEDMatrixUtilities.o
  *fill*         0x2000007a        0x2 
- .data.matrixDataGFrame2.12493
+ .data.matrixDataGFrame1.12490
                 0x2000007c       0x12 src/LEDMatrixUtilities.o
  *fill*         0x2000008e        0x2 
- .data.matrixDataGFrame3.12496
+ .data.matrixDataGFrame2.12493
                 0x20000090       0x12 src/LEDMatrixUtilities.o
  *fill*         0x200000a2        0x2 
- .data.matrixDataGFrame4.12499
+ .data.matrixDataGFrame3.12496
                 0x200000a4       0x12 src/LEDMatrixUtilities.o
  *fill*         0x200000b6        0x2 
- .data.matrixDataRFrame1.12489
+ .data.matrixDataGFrame4.12499
                 0x200000b8       0x12 src/LEDMatrixUtilities.o
  *fill*         0x200000ca        0x2 
+ .data.matrixDataRFrame1.12489
+                0x200000cc       0x12 src/LEDMatrixUtilities.o
+ *fill*         0x200000de        0x2 
  .data._impure_ptr
-                0x200000cc        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-impure.o)
-                0x200000cc                _impure_ptr
+                0x200000e0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-impure.o)
+                0x200000e0                _impure_ptr
  .data.impure_data
-                0x200000d0       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-impure.o)
-                0x20000130                . = ALIGN (0x4)
-                0x20000130                _erelocate = .
+                0x200000e4       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-impure.o)
+                0x20000144                . = ALIGN (0x4)
+                0x20000144                _erelocate = .
 
-.bss            0x20000130      0x788 load address 0x000035a0
-                0x20000130                . = ALIGN (0x4)
-                0x20000130                _sbss = .
-                0x20000130                _szero = .
+.bss            0x20000150      0x3b8 load address 0x00003620
+                0x20000150                . = ALIGN (0x4)
+                0x20000150                _sbss = .
+                0x20000150                _szero = .
  *(.bss .bss.*)
- .bss           0x20000130       0x1c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
+ .bss           0x20000150       0x1c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/crtbegin.o
  .bss._dma_active_resource
-                0x2000014c       0x14 src/ASF/sam0/drivers/dma/dma.o
+                0x2000016c       0x14 src/ASF/sam0/drivers/dma/dma.o
  .bss._write_back_section
-                0x20000160       0x50 src/ASF/sam0/drivers/dma/dma.o
+                0x20000180       0x50 src/ASF/sam0/drivers/dma/dma.o
  .bss.g_chan_interrupt_flag
-                0x200001b0        0x5 src/ASF/sam0/drivers/dma/dma.o
-                0x200001b0                g_chan_interrupt_flag
- *fill*         0x200001b5        0x3 
+                0x200001d0        0x5 src/ASF/sam0/drivers/dma/dma.o
+                0x200001d0                g_chan_interrupt_flag
+ *fill*         0x200001d5        0x3 
  .bss._sercom_config
-                0x200001b8        0x2 src/ASF/sam0/drivers/sercom/sercom.o
+                0x200001d8        0x2 src/ASF/sam0/drivers/sercom/sercom.o
  .bss._handler_table_initialized
-                0x200001ba        0x1 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
- *fill*         0x200001bb        0x1 
+                0x200001da        0x1 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+ *fill*         0x200001db        0x1 
  .bss._sercom_interrupt_handlers
-                0x200001bc        0xc src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+                0x200001dc        0xc src/ASF/sam0/drivers/sercom/sercom_interrupt.o
  .bss.cpu_irq_critical_section_counter
-                0x200001c8        0x4 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+                0x200001e8        0x4 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
  .bss.cpu_irq_prev_interrupt_state
-                0x200001cc        0x1 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- *fill*         0x200001cd        0x3 
+                0x200001ec        0x1 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ *fill*         0x200001ed        0x3 
  .bss._system_clock_inst
-                0x200001d0       0x18 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+                0x200001f0       0x18 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
  .bss.heap.5276
-                0x200001e8        0x4 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+                0x20000208        0x4 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .bss.SPISend.12439
-                0x200001ec        0xd src/LEDMatrixControl.o
+                0x2000020c        0xd src/LEDMatrixControl.o
  .bss.currentLEDMatrixMode.12467
-                0x200001f9        0x1 src/LEDMatrixControl.o
+                0x20000219        0x1 src/LEDMatrixControl.o
  .bss.updateLEDRows
-                0x200001fa        0x1 src/LEDMatrixControl.o
- *fill*         0x200001fb        0x1 
- .bss.packet    0x200001fc        0x8 src/LEDMatrixI2CSlave.o
+                0x2000021a        0x1 src/LEDMatrixControl.o
+ *fill*         0x2000021b        0x1 
  .bss.read_buffer
-                0x20000204       0x37 src/LEDMatrixI2CSlave.o
- *fill*         0x2000023b        0x1 
- .bss.tempDialOutputs.12432
-                0x2000023c        0x2 src/LEDMatrixI2CSlave.o
- .bss.prevColumnValue.12438
-                0x2000023e        0x1 src/LEDMatrixMultiplyMode.o
- .bss.prevRowValue.12426
-                0x2000023f        0x1 src/LEDMatrixMultiplyMode.o
+                0x2000021c       0x37 src/LEDMatrixI2CSlave.o
+ *fill*         0x20000253        0x1 
+ .bss.tempDialOutputs.12436
+                0x20000254        0x4 src/LEDMatrixI2CSlave.o
+ .bss.prevColumnValue.12437
+                0x20000258        0x1 src/LEDMatrixMultiplyMode.o
+ .bss.prevRowValue.12425
+                0x20000259        0x1 src/LEDMatrixMultiplyMode.o
+ *fill*         0x2000025a        0x2 
  .bss.ADCResult
-                0x20000240        0x4 src/LEDMatrixReadDial.o
-                0x20000240                ADCResult
- .bss.countThresholdL.12435
-                0x20000244        0x2 src/LEDMatrixReadDial.o
- .bss.countThresholdR.12436
-                0x20000246        0x2 src/LEDMatrixReadDial.o
- .bss.dialLValueInf.12433
-                0x20000248        0x2 src/LEDMatrixReadDial.o
- .bss.dialRValueInf.12434
-                0x2000024a        0x2 src/LEDMatrixReadDial.o
- .bss.testCount.12440
-                0x2000024c        0x2 src/LEDMatrixReadDial.o
- *fill*         0x2000024e        0x2 
- .bss.matrixDataRFrame2.12492
-                0x20000250       0x12 src/LEDMatrixUtilities.o
- *fill*         0x20000262        0x2 
- .bss.matrixDataRFrame3.12495
-                0x20000264       0x12 src/LEDMatrixUtilities.o
- *fill*         0x20000276        0x2 
- .bss.matrixDataRFrame4.12498
-                0x20000278       0x12 src/LEDMatrixUtilities.o
- .bss.I2CReadComplete
-                0x2000028a        0x1 src/main.o
-                0x2000028a                I2CReadComplete
- .bss.I2CWriteComplete
-                0x2000028b        0x1 src/main.o
-                0x2000028b                I2CWriteComplete
- .bss.LEDMatrixMode
-                0x2000028c        0x1 src/main.o
-                0x2000028c                LEDMatrixMode
- .bss.sensorsUpdate
-                0x2000028d        0x1 src/main.o
-                0x2000028d                sensorsUpdate
- .bss.transferDone
-                0x2000028e        0x1 src/main.o
-                0x2000028e                transferDone
- *fill*         0x2000028f        0x1 
+                0x2000025c        0x4 src/LEDMatrixReadDial.o
+                0x2000025c                ADCResult
+ .bss.countThresholdL.12439
+                0x20000260        0x2 src/LEDMatrixReadDial.o
+ .bss.countThresholdR.12440
+                0x20000262        0x2 src/LEDMatrixReadDial.o
+ .bss.dialLValueInf.12437
+                0x20000264        0x2 src/LEDMatrixReadDial.o
+ .bss.dialRValueInf.12438
+                0x20000266        0x2 src/LEDMatrixReadDial.o
+ .bss.tempCount.12447
+                0x20000268        0x1 src/LEDMatrixReadDial.o
+ *fill*         0x20000269        0x1 
+ .bss.testCount.12444
+                0x2000026a        0x2 src/LEDMatrixReadDial.o
  .bss.useDialLValue
-                0x20000290        0x2 src/main.o
-                0x20000290                useDialLValue
+                0x2000026c        0x2 src/LEDMatrixReadDial.o
  .bss.useDialRValue
-                0x20000292        0x2 src/main.o
-                0x20000292                useDialRValue
+                0x2000026e        0x2 src/LEDMatrixReadDial.o
+ .bss.matrixDataRFrame2.12492
+                0x20000270       0x12 src/LEDMatrixUtilities.o
+ *fill*         0x20000282        0x2 
+ .bss.matrixDataRFrame3.12495
+                0x20000284       0x12 src/LEDMatrixUtilities.o
+ *fill*         0x20000296        0x2 
+ .bss.matrixDataRFrame4.12498
+                0x20000298       0x12 src/LEDMatrixUtilities.o
+ .bss.I2CReadComplete
+                0x200002aa        0x1 src/main.o
+                0x200002aa                I2CReadComplete
+ .bss.LEDMatrixMode
+                0x200002ab        0x1 src/main.o
+                0x200002ab                LEDMatrixMode
+ .bss.sensorsUpdate
+                0x200002ac        0x1 src/main.o
+                0x200002ac                sensorsUpdate
+ .bss.transferDone
+                0x200002ad        0x1 src/main.o
+                0x200002ad                transferDone
+ *fill*         0x200002ae        0x2 
  .bss.__malloc_free_list
-                0x20000294        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-nano-mallocr.o)
-                0x20000294                __malloc_free_list
+                0x200002b0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-nano-mallocr.o)
+                0x200002b0                __malloc_free_list
  .bss.__malloc_sbrk_start
-                0x20000298        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-nano-mallocr.o)
-                0x20000298                __malloc_sbrk_start
+                0x200002b4        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-nano-mallocr.o)
+                0x200002b4                __malloc_sbrk_start
  *(COMMON)
- COMMON         0x2000029c        0x4 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
-                0x2000029c                _adc_instances
- COMMON         0x200002a0       0x50 src/ASF/sam0/drivers/dma/dma.o
-                0x200002a0                descriptor_section
- COMMON         0x200002f0        0xc src/ASF/sam0/drivers/sercom/sercom_interrupt.o
-                0x200002f0                _sercom_instances
- COMMON         0x200002fc        0x2 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
-                0x200002fc                dummy_write
- *fill*         0x200002fe        0x2 
- COMMON         0x20000300        0x8 src/ASF/sam0/drivers/tc/tc_interrupt.o
-                0x20000300                _tc_instances
- COMMON         0x20000308       0x1c src/LEDMatrixControl.o
-                0x20000308                tcLEDMatrix
- COMMON         0x20000324       0x34 src/LEDMatrixI2CSlave.o
-                0x20000324                i2c_slave_instance
- COMMON         0x20000358       0x3d src/LEDMatrixMultiplyMode.o
-                0x20000358                minCThresh
-                0x20000368                maxRThresh
-                0x20000378                maxCThresh
-                0x20000388                minRThresh
- *fill*         0x20000395        0x3 
- COMMON         0x20000398      0x408 src/LEDMatrixReadDial.o
-                0x20000398                testLogDialL
-                0x20000780                adc_instance
- COMMON         0x200007a0       0x68 src/LEDMatrixSPIMaster.o
-                0x200007a0                example_descriptor
-                0x200007b0                example_resource
-                0x200007cc                spi_master_instance
- COMMON         0x20000808       0xaa src/main.o
-                0x20000808                DMASourceRegister
-                0x20000818                RMatrix
-                0x20000838                BMatrix
-                0x20000858                I2CReadBuffer
-                0x20000890                GMatrix
-                0x200008b0                dialOutputs
- *fill*         0x200008b2        0x2 
- COMMON         0x200008b4        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-reent.o)
-                0x200008b4                errno
-                0x200008b8                . = ALIGN (0x4)
-                0x200008b8                _ebss = .
-                0x200008b8                _ezero = .
+ COMMON         0x200002b8        0x4 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
+                0x200002b8                _adc_instances
+ *fill*         0x200002bc        0x4 
+ COMMON         0x200002c0       0x50 src/ASF/sam0/drivers/dma/dma.o
+                0x200002c0                descriptor_section
+ COMMON         0x20000310        0xc src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+                0x20000310                _sercom_instances
+ COMMON         0x2000031c        0x2 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
+                0x2000031c                dummy_write
+ *fill*         0x2000031e        0x2 
+ COMMON         0x20000320        0x8 src/ASF/sam0/drivers/tc/tc_interrupt.o
+                0x20000320                _tc_instances
+ COMMON         0x20000328       0x1c src/LEDMatrixControl.o
+                0x20000328                tcLEDMatrix
+ COMMON         0x20000344       0x44 src/LEDMatrixI2CSlave.o
+                0x20000344                packet
+                0x2000034c                rd_packet
+                0x20000354                i2c_slave_instance
+ COMMON         0x20000388       0x3d src/LEDMatrixMultiplyMode.o
+                0x20000388                minCThresh
+                0x20000398                maxRThresh
+                0x200003a8                maxCThresh
+                0x200003b8                minRThresh
+ *fill*         0x200003c5        0x3 
+ COMMON         0x200003c8       0x20 src/LEDMatrixReadDial.o
+                0x200003c8                adc_instance
+ *fill*         0x200003e8        0x8 
+ COMMON         0x200003f0       0x68 src/LEDMatrixSPIMaster.o
+                0x200003f0                example_descriptor
+                0x20000400                example_resource
+                0x2000041c                spi_master_instance
+ COMMON         0x20000458       0xaa src/main.o
+                0x20000458                DMASourceRegister
+                0x20000468                RMatrix
+                0x20000488                BMatrix
+                0x200004a8                I2CReadBuffer
+                0x200004e0                GMatrix
+                0x20000500                dialOutputs
+ *fill*         0x20000502        0x2 
+ COMMON         0x20000504        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-reent.o)
+                0x20000504                errno
+                0x20000508                . = ALIGN (0x4)
+                0x20000508                _ebss = .
+                0x20000508                _ezero = .
 
-.stack          0x200008b8      0x400 load address 0x00003d28
-                0x200008b8                . = ALIGN (0x8)
-                0x200008b8                _sstack = .
-                0x20000cb8                . = (. + STACK_SIZE)
- *fill*         0x200008b8      0x400 
-                0x20000cb8                . = ALIGN (0x8)
-                0x20000cb8                _estack = .
-                0x20000cb8                . = ALIGN (0x4)
-                0x20000cb8                _end = .
+.stack          0x20000508      0x400 load address 0x000039d8
+                0x20000508                . = ALIGN (0x8)
+                0x20000508                _sstack = .
+                0x20000908                . = (. + STACK_SIZE)
+ *fill*         0x20000508      0x400 
+                0x20000908                . = ALIGN (0x8)
+                0x20000908                _estack = .
+                0x20000908                . = ALIGN (0x4)
+                0x20000908                _end = .
 OUTPUT(LEDMatrixFlutter.elf elf32-littlearm)
 
 .ARM.attributes
@@ -7572,71 +7609,71 @@ OUTPUT(LEDMatrixFlutter.elf elf32-littlearm)
  .comment       0x00000059       0x5a src/LEDMatrixUtilities.o
  .comment       0x00000059       0x5a src/main.o
 
-.debug_info     0x00000000    0x4abd0
+.debug_info     0x00000000    0x4c1d6
  .debug_info    0x00000000      0xb81 src/ASF/common2/services/delay/sam0/systick_counter.o
  .debug_info    0x00000b81     0x3d39 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
  .debug_info    0x000048ba     0x1bbe src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
  .debug_info    0x00006478     0x32d9 src/ASF/sam0/drivers/dma/dma.o
  .debug_info    0x00009751     0x4af6 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave.o
- .debug_info    0x0000e247     0x3176 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
- .debug_info    0x000113bd     0x2d8a src/ASF/sam0/drivers/sercom/sercom.o
- .debug_info    0x00014147     0x2af8 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
- .debug_info    0x00016c3f     0x68ea src/ASF/sam0/drivers/sercom/spi/spi.o
- .debug_info    0x0001d529     0x3188 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
- .debug_info    0x000206b1     0x2eb9 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
- .debug_info    0x0002356a     0x1ae9 src/ASF/sam0/drivers/tc/tc_interrupt.o
- .debug_info    0x00025053     0x12ac src/ASF/sam0/drivers/port/port.o
- .debug_info    0x000262ff     0x191d src/ASF/common2/boards/user_board/init.o
- .debug_info    0x00027c1c      0xafb src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_info    0x00028717     0x38a5 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
- .debug_info    0x0002bfbc     0x1e47 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
- .debug_info    0x0002de03     0x13ea src/ASF/sam0/drivers/system/pinmux/pinmux.o
- .debug_info    0x0002f1ed      0xa67 src/ASF/sam0/drivers/system/system.o
- .debug_info    0x0002fc54     0x1ab0 src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
- .debug_info    0x00031704      0xd8c src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_info    0x00032490     0x19ad src/LEDMatrixBluetoothMode.o
- .debug_info    0x00033e3d     0x3ac0 src/LEDMatrixControl.o
- .debug_info    0x000378fd     0x427f src/LEDMatrixI2CSlave.o
- .debug_info    0x0003bb7c     0x1f6b src/LEDMatrixMultiplyMode.o
- .debug_info    0x0003dae7     0x2929 src/LEDMatrixReadDial.o
- .debug_info    0x00040410     0x23ea src/LEDMatrixSPIControl.o
- .debug_info    0x000427fa     0x4751 src/LEDMatrixSPIMaster.o
- .debug_info    0x00046f4b     0x1e86 src/LEDMatrixUtilities.o
- .debug_info    0x00048dd1     0x1dff src/main.o
+ .debug_info    0x0000e247     0x3f31 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_info    0x00012178     0x2d8a src/ASF/sam0/drivers/sercom/sercom.o
+ .debug_info    0x00014f02     0x2af8 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+ .debug_info    0x000179fa     0x68ea src/ASF/sam0/drivers/sercom/spi/spi.o
+ .debug_info    0x0001e2e4     0x3188 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
+ .debug_info    0x0002146c     0x2eb9 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
+ .debug_info    0x00024325     0x1ae9 src/ASF/sam0/drivers/tc/tc_interrupt.o
+ .debug_info    0x00025e0e     0x12ac src/ASF/sam0/drivers/port/port.o
+ .debug_info    0x000270ba     0x191d src/ASF/common2/boards/user_board/init.o
+ .debug_info    0x000289d7      0xafb src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_info    0x000294d2     0x38a5 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+ .debug_info    0x0002cd77     0x1e47 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
+ .debug_info    0x0002ebbe     0x13ea src/ASF/sam0/drivers/system/pinmux/pinmux.o
+ .debug_info    0x0002ffa8      0xa67 src/ASF/sam0/drivers/system/system.o
+ .debug_info    0x00030a0f     0x1ab0 src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
+ .debug_info    0x000324bf      0xd8c src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_info    0x0003324b     0x19ad src/LEDMatrixBluetoothMode.o
+ .debug_info    0x00034bf8     0x33bf src/LEDMatrixControl.o
+ .debug_info    0x00037fb7     0x4a40 src/LEDMatrixI2CSlave.o
+ .debug_info    0x0003c9f7     0x1f73 src/LEDMatrixMultiplyMode.o
+ .debug_info    0x0003e96a     0x309c src/LEDMatrixReadDial.o
+ .debug_info    0x00041a06     0x23ea src/LEDMatrixSPIControl.o
+ .debug_info    0x00043df0     0x4751 src/LEDMatrixSPIMaster.o
+ .debug_info    0x00048541     0x1e86 src/LEDMatrixUtilities.o
+ .debug_info    0x0004a3c7     0x1e0f src/main.o
 
-.debug_abbrev   0x00000000     0x667e
+.debug_abbrev   0x00000000     0x66d2
  .debug_abbrev  0x00000000      0x24b src/ASF/common2/services/delay/sam0/systick_counter.o
  .debug_abbrev  0x0000024b      0x45c src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
  .debug_abbrev  0x000006a7      0x3b8 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
  .debug_abbrev  0x00000a5f      0x4a9 src/ASF/sam0/drivers/dma/dma.o
  .debug_abbrev  0x00000f08      0x4ef src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave.o
- .debug_abbrev  0x000013f7      0x3b4 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
- .debug_abbrev  0x000017ab      0x378 src/ASF/sam0/drivers/sercom/sercom.o
- .debug_abbrev  0x00001b23      0x2da src/ASF/sam0/drivers/sercom/sercom_interrupt.o
- .debug_abbrev  0x00001dfd      0x51f src/ASF/sam0/drivers/sercom/spi/spi.o
- .debug_abbrev  0x0000231c      0x3ee src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
- .debug_abbrev  0x0000270a      0x44f src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
- .debug_abbrev  0x00002b59      0x2ff src/ASF/sam0/drivers/tc/tc_interrupt.o
- .debug_abbrev  0x00002e58      0x298 src/ASF/sam0/drivers/port/port.o
- .debug_abbrev  0x000030f0      0x21e src/ASF/common2/boards/user_board/init.o
- .debug_abbrev  0x0000330e      0x22c src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_abbrev  0x0000353a      0x493 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
- .debug_abbrev  0x000039cd      0x3f1 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
- .debug_abbrev  0x00003dbe      0x36e src/ASF/sam0/drivers/system/pinmux/pinmux.o
- .debug_abbrev  0x0000412c      0x1e1 src/ASF/sam0/drivers/system/system.o
- .debug_abbrev  0x0000430d      0x200 src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
- .debug_abbrev  0x0000450d      0x257 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_abbrev  0x00004764      0x263 src/LEDMatrixBluetoothMode.o
- .debug_abbrev  0x000049c7      0x430 src/LEDMatrixControl.o
- .debug_abbrev  0x00004df7      0x3ef src/LEDMatrixI2CSlave.o
- .debug_abbrev  0x000051e6      0x3d8 src/LEDMatrixMultiplyMode.o
- .debug_abbrev  0x000055be      0x3ef src/LEDMatrixReadDial.o
- .debug_abbrev  0x000059ad      0x320 src/LEDMatrixSPIControl.o
- .debug_abbrev  0x00005ccd      0x400 src/LEDMatrixSPIMaster.o
- .debug_abbrev  0x000060cd      0x2ce src/LEDMatrixUtilities.o
- .debug_abbrev  0x0000639b      0x2e3 src/main.o
+ .debug_abbrev  0x000013f7      0x3d0 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_abbrev  0x000017c7      0x378 src/ASF/sam0/drivers/sercom/sercom.o
+ .debug_abbrev  0x00001b3f      0x2da src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+ .debug_abbrev  0x00001e19      0x51f src/ASF/sam0/drivers/sercom/spi/spi.o
+ .debug_abbrev  0x00002338      0x3ee src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
+ .debug_abbrev  0x00002726      0x44f src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
+ .debug_abbrev  0x00002b75      0x2ff src/ASF/sam0/drivers/tc/tc_interrupt.o
+ .debug_abbrev  0x00002e74      0x298 src/ASF/sam0/drivers/port/port.o
+ .debug_abbrev  0x0000310c      0x21e src/ASF/common2/boards/user_board/init.o
+ .debug_abbrev  0x0000332a      0x22c src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_abbrev  0x00003556      0x493 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+ .debug_abbrev  0x000039e9      0x3f1 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
+ .debug_abbrev  0x00003dda      0x36e src/ASF/sam0/drivers/system/pinmux/pinmux.o
+ .debug_abbrev  0x00004148      0x1e1 src/ASF/sam0/drivers/system/system.o
+ .debug_abbrev  0x00004329      0x200 src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
+ .debug_abbrev  0x00004529      0x257 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_abbrev  0x00004780      0x263 src/LEDMatrixBluetoothMode.o
+ .debug_abbrev  0x000049e3      0x416 src/LEDMatrixControl.o
+ .debug_abbrev  0x00004df9      0x423 src/LEDMatrixI2CSlave.o
+ .debug_abbrev  0x0000521c      0x3d8 src/LEDMatrixMultiplyMode.o
+ .debug_abbrev  0x000055f4      0x40d src/LEDMatrixReadDial.o
+ .debug_abbrev  0x00005a01      0x320 src/LEDMatrixSPIControl.o
+ .debug_abbrev  0x00005d21      0x400 src/LEDMatrixSPIMaster.o
+ .debug_abbrev  0x00006121      0x2ce src/LEDMatrixUtilities.o
+ .debug_abbrev  0x000063ef      0x2e3 src/main.o
 
-.debug_loc      0x00000000     0xa1a8
+.debug_loc      0x00000000     0xa267
  .debug_loc     0x00000000       0xe4 src/ASF/common2/services/delay/sam0/systick_counter.o
  .debug_loc     0x000000e4      0x891 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
  .debug_loc     0x00000975      0x34a src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
@@ -7657,16 +7694,16 @@ OUTPUT(LEDMatrixFlutter.elf elf32-littlearm)
  .debug_loc     0x000082f2       0x40 src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
  .debug_loc     0x00008332       0xef src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .debug_loc     0x00008421       0x58 src/LEDMatrixBluetoothMode.o
- .debug_loc     0x00008479      0x2a5 src/LEDMatrixControl.o
- .debug_loc     0x0000871e      0x302 src/LEDMatrixI2CSlave.o
- .debug_loc     0x00008a20      0x5f4 src/LEDMatrixMultiplyMode.o
- .debug_loc     0x00009014      0x57b src/LEDMatrixReadDial.o
- .debug_loc     0x0000958f      0x25f src/LEDMatrixSPIControl.o
- .debug_loc     0x000097ee      0x1f8 src/LEDMatrixSPIMaster.o
- .debug_loc     0x000099e6      0x701 src/LEDMatrixUtilities.o
- .debug_loc     0x0000a0e7       0xc1 src/main.o
+ .debug_loc     0x00008479      0x27d src/LEDMatrixControl.o
+ .debug_loc     0x000086f6      0x366 src/LEDMatrixI2CSlave.o
+ .debug_loc     0x00008a5c      0x5f2 src/LEDMatrixMultiplyMode.o
+ .debug_loc     0x0000904e      0x600 src/LEDMatrixReadDial.o
+ .debug_loc     0x0000964e      0x25f src/LEDMatrixSPIControl.o
+ .debug_loc     0x000098ad      0x1f8 src/LEDMatrixSPIMaster.o
+ .debug_loc     0x00009aa5      0x701 src/LEDMatrixUtilities.o
+ .debug_loc     0x0000a1a6       0xc1 src/main.o
 
-.debug_aranges  0x00000000      0x840
+.debug_aranges  0x00000000      0x850
  .debug_aranges
                 0x00000000       0x30 src/ASF/common2/services/delay/sam0/systick_counter.o
  .debug_aranges
@@ -7714,21 +7751,21 @@ OUTPUT(LEDMatrixFlutter.elf elf32-littlearm)
  .debug_aranges
                 0x00000610       0x60 src/LEDMatrixControl.o
  .debug_aranges
-                0x00000670       0x48 src/LEDMatrixI2CSlave.o
+                0x00000670       0x58 src/LEDMatrixI2CSlave.o
  .debug_aranges
-                0x000006b8       0x68 src/LEDMatrixMultiplyMode.o
+                0x000006c8       0x68 src/LEDMatrixMultiplyMode.o
  .debug_aranges
-                0x00000720       0x40 src/LEDMatrixReadDial.o
+                0x00000730       0x40 src/LEDMatrixReadDial.o
  .debug_aranges
-                0x00000760       0x38 src/LEDMatrixSPIControl.o
+                0x00000770       0x38 src/LEDMatrixSPIControl.o
  .debug_aranges
-                0x00000798       0x48 src/LEDMatrixSPIMaster.o
+                0x000007a8       0x48 src/LEDMatrixSPIMaster.o
  .debug_aranges
-                0x000007e0       0x38 src/LEDMatrixUtilities.o
+                0x000007f0       0x38 src/LEDMatrixUtilities.o
  .debug_aranges
-                0x00000818       0x28 src/main.o
+                0x00000828       0x28 src/main.o
 
-.debug_ranges   0x00000000      0xcc0
+.debug_ranges   0x00000000      0xcd0
  .debug_ranges  0x00000000       0x50 src/ASF/common2/services/delay/sam0/systick_counter.o
  .debug_ranges  0x00000050       0xa0 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
  .debug_ranges  0x000000f0       0x50 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
@@ -7752,15 +7789,15 @@ OUTPUT(LEDMatrixFlutter.elf elf32-littlearm)
  .debug_ranges  0x00000a78       0x50 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .debug_ranges  0x00000ac8       0x10 src/LEDMatrixBluetoothMode.o
  .debug_ranges  0x00000ad8       0x50 src/LEDMatrixControl.o
- .debug_ranges  0x00000b28       0x38 src/LEDMatrixI2CSlave.o
- .debug_ranges  0x00000b60       0x58 src/LEDMatrixMultiplyMode.o
- .debug_ranges  0x00000bb8       0x68 src/LEDMatrixReadDial.o
- .debug_ranges  0x00000c20       0x28 src/LEDMatrixSPIControl.o
- .debug_ranges  0x00000c48       0x38 src/LEDMatrixSPIMaster.o
- .debug_ranges  0x00000c80       0x28 src/LEDMatrixUtilities.o
- .debug_ranges  0x00000ca8       0x18 src/main.o
+ .debug_ranges  0x00000b28       0x48 src/LEDMatrixI2CSlave.o
+ .debug_ranges  0x00000b70       0x58 src/LEDMatrixMultiplyMode.o
+ .debug_ranges  0x00000bc8       0x68 src/LEDMatrixReadDial.o
+ .debug_ranges  0x00000c30       0x28 src/LEDMatrixSPIControl.o
+ .debug_ranges  0x00000c58       0x38 src/LEDMatrixSPIMaster.o
+ .debug_ranges  0x00000c90       0x28 src/LEDMatrixUtilities.o
+ .debug_ranges  0x00000cb8       0x18 src/main.o
 
-.debug_macro    0x00000000    0x1a72f
+.debug_macro    0x00000000    0x1a847
  .debug_macro   0x00000000      0x4d5 src/ASF/common2/services/delay/sam0/systick_counter.o
  .debug_macro   0x000004d5      0x8c2 src/ASF/common2/services/delay/sam0/systick_counter.o
  .debug_macro   0x00000d97      0x16d src/ASF/common2/services/delay/sam0/systick_counter.o
@@ -7877,90 +7914,90 @@ OUTPUT(LEDMatrixFlutter.elf elf32-littlearm)
  .debug_macro   0x00011582       0x10 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave.o
  .debug_macro   0x00011592       0x27 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave.o
  .debug_macro   0x000115b9       0x40 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave.o
- .debug_macro   0x000115f9      0x544 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
- .debug_macro   0x00011b3d      0x527 src/ASF/sam0/drivers/sercom/sercom.o
- .debug_macro   0x00012064      0x524 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
- .debug_macro   0x00012588      0x56d src/ASF/sam0/drivers/sercom/spi/spi.o
- .debug_macro   0x00012af5       0x16 src/ASF/sam0/drivers/sercom/spi/spi.o
- .debug_macro   0x00012b0b       0x16 src/ASF/sam0/drivers/sercom/spi/spi.o
- .debug_macro   0x00012b21       0x35 src/ASF/sam0/drivers/sercom/spi/spi.o
- .debug_macro   0x00012b56      0x577 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
- .debug_macro   0x000130cd      0x523 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
- .debug_macro   0x000135f0       0x19 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
- .debug_macro   0x00013609       0x51 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
- .debug_macro   0x0001365a      0x508 src/ASF/sam0/drivers/tc/tc_interrupt.o
- .debug_macro   0x00013b62      0x4b6 src/ASF/sam0/drivers/port/port.o
- .debug_macro   0x00014018      0x64c src/ASF/common2/boards/user_board/init.o
- .debug_macro   0x00014664       0x76 src/ASF/common2/boards/user_board/init.o
- .debug_macro   0x000146da       0x10 src/ASF/common2/boards/user_board/init.o
- .debug_macro   0x000146ea       0x1c src/ASF/common2/boards/user_board/init.o
- .debug_macro   0x00014706      0x2c6 src/ASF/common2/boards/user_board/init.o
- .debug_macro   0x000149cc       0x11 src/ASF/common2/boards/user_board/init.o
- .debug_macro   0x000149dd       0x2d src/ASF/common2/boards/user_board/init.o
- .debug_macro   0x00014a0a       0x2e src/ASF/common2/boards/user_board/init.o
- .debug_macro   0x00014a38       0x6c src/ASF/common2/boards/user_board/init.o
- .debug_macro   0x00014aa4      0x49a src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_macro   0x00014f3e      0x50d src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
- .debug_macro   0x0001544b      0x234 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
- .debug_macro   0x0001567f      0x4d0 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
- .debug_macro   0x00015b4f      0x4aa src/ASF/sam0/drivers/system/pinmux/pinmux.o
- .debug_macro   0x00015ff9       0x12 src/ASF/sam0/drivers/system/pinmux/pinmux.o
- .debug_macro   0x0001600b      0x4dd src/ASF/sam0/drivers/system/system.o
- .debug_macro   0x000164e8      0x281 src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
- .debug_macro   0x00016769       0x3a src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
- .debug_macro   0x000167a3      0x1d6 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016979       0x97 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016a10       0xf6 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016b06       0x4c src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016b52       0x16 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016b68       0x10 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016b78       0x10 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016b88       0x35 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016bbd      0x122 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016cdf      0x668 src/LEDMatrixBluetoothMode.o
- .debug_macro   0x00017347      0x6a5 src/LEDMatrixControl.o
- .debug_macro   0x000179ec       0x34 src/LEDMatrixControl.o
- .debug_macro   0x00017a20      0x66e src/LEDMatrixI2CSlave.o
- .debug_macro   0x0001808e      0x685 src/LEDMatrixMultiplyMode.o
- .debug_macro   0x00018713      0x66f src/LEDMatrixReadDial.o
- .debug_macro   0x00018d82      0x661 src/LEDMatrixSPIControl.o
- .debug_macro   0x000193e3      0x65b src/LEDMatrixSPIMaster.o
- .debug_macro   0x00019a3e      0x65e src/LEDMatrixUtilities.o
- .debug_macro   0x0001a09c      0x693 src/main.o
+ .debug_macro   0x000115f9      0x650 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x00011c49       0x76 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x00011cbf       0x10 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x00011ccf       0x1c src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x00011ceb      0x2c6 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x00011fb1       0x11 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x00011fc2       0x16 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x00011fd8       0x16 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x00011fee       0x2e src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x0001201c       0x6c src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_macro   0x00012088      0x527 src/ASF/sam0/drivers/sercom/sercom.o
+ .debug_macro   0x000125af      0x524 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+ .debug_macro   0x00012ad3      0x56d src/ASF/sam0/drivers/sercom/spi/spi.o
+ .debug_macro   0x00013040       0x35 src/ASF/sam0/drivers/sercom/spi/spi.o
+ .debug_macro   0x00013075      0x577 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
+ .debug_macro   0x000135ec      0x523 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
+ .debug_macro   0x00013b0f       0x19 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
+ .debug_macro   0x00013b28       0x51 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
+ .debug_macro   0x00013b79      0x508 src/ASF/sam0/drivers/tc/tc_interrupt.o
+ .debug_macro   0x00014081      0x4b6 src/ASF/sam0/drivers/port/port.o
+ .debug_macro   0x00014537      0x64c src/ASF/common2/boards/user_board/init.o
+ .debug_macro   0x00014b83       0x2d src/ASF/common2/boards/user_board/init.o
+ .debug_macro   0x00014bb0      0x49a src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_macro   0x0001504a      0x50d src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+ .debug_macro   0x00015557      0x234 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+ .debug_macro   0x0001578b      0x4d0 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
+ .debug_macro   0x00015c5b      0x4aa src/ASF/sam0/drivers/system/pinmux/pinmux.o
+ .debug_macro   0x00016105       0x12 src/ASF/sam0/drivers/system/pinmux/pinmux.o
+ .debug_macro   0x00016117      0x4dd src/ASF/sam0/drivers/system/system.o
+ .debug_macro   0x000165f4      0x281 src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
+ .debug_macro   0x00016875       0x3a src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
+ .debug_macro   0x000168af      0x1d6 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00016a85       0x97 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00016b1c       0xf6 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00016c12       0x4c src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00016c5e       0x16 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00016c74       0x10 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00016c84       0x10 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00016c94       0x35 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00016cc9      0x122 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00016deb      0x668 src/LEDMatrixBluetoothMode.o
+ .debug_macro   0x00017453      0x6a5 src/LEDMatrixControl.o
+ .debug_macro   0x00017af8       0x34 src/LEDMatrixControl.o
+ .debug_macro   0x00017b2c      0x66e src/LEDMatrixI2CSlave.o
+ .debug_macro   0x0001819a      0x685 src/LEDMatrixMultiplyMode.o
+ .debug_macro   0x0001881f      0x67b src/LEDMatrixReadDial.o
+ .debug_macro   0x00018e9a      0x661 src/LEDMatrixSPIControl.o
+ .debug_macro   0x000194fb      0x65b src/LEDMatrixSPIMaster.o
+ .debug_macro   0x00019b56      0x65e src/LEDMatrixUtilities.o
+ .debug_macro   0x0001a1b4      0x693 src/main.o
 
-.debug_line     0x00000000    0x1690c
+.debug_line     0x00000000    0x16bfc
  .debug_line    0x00000000      0x953 src/ASF/common2/services/delay/sam0/systick_counter.o
  .debug_line    0x00000953      0xcd8 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
  .debug_line    0x0000162b      0xb97 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
  .debug_line    0x000021c2      0xc03 src/ASF/sam0/drivers/dma/dma.o
  .debug_line    0x00002dc5      0xd3a src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave.o
- .debug_line    0x00003aff      0xcec src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
- .debug_line    0x000047eb      0xb37 src/ASF/sam0/drivers/sercom/sercom.o
- .debug_line    0x00005322      0xacc src/ASF/sam0/drivers/sercom/sercom_interrupt.o
- .debug_line    0x00005dee     0x12fb src/ASF/sam0/drivers/sercom/spi/spi.o
- .debug_line    0x000070e9      0xcb0 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
- .debug_line    0x00007d99      0xd25 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
- .debug_line    0x00008abe      0xa03 src/ASF/sam0/drivers/tc/tc_interrupt.o
- .debug_line    0x000094c1      0x88c src/ASF/sam0/drivers/port/port.o
- .debug_line    0x00009d4d      0xd30 src/ASF/common2/boards/user_board/init.o
- .debug_line    0x0000aa7d      0x860 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_line    0x0000b2dd      0xc49 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
- .debug_line    0x0000bf26      0xc09 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
- .debug_line    0x0000cb2f      0x8d9 src/ASF/sam0/drivers/system/pinmux/pinmux.o
- .debug_line    0x0000d408      0x980 src/ASF/sam0/drivers/system/system.o
- .debug_line    0x0000dd88      0x5dc src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
- .debug_line    0x0000e364      0x40a src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_line    0x0000e76e      0xd79 src/LEDMatrixBluetoothMode.o
- .debug_line    0x0000f4e7      0xf0b src/LEDMatrixControl.o
- .debug_line    0x000103f2      0xe19 src/LEDMatrixI2CSlave.o
- .debug_line    0x0001120b      0xee1 src/LEDMatrixMultiplyMode.o
- .debug_line    0x000120ec      0xea8 src/LEDMatrixReadDial.o
- .debug_line    0x00012f94      0xe14 src/LEDMatrixSPIControl.o
- .debug_line    0x00013da8      0xe29 src/LEDMatrixSPIMaster.o
- .debug_line    0x00014bd1      0xf25 src/LEDMatrixUtilities.o
- .debug_line    0x00015af6      0xe16 src/main.o
+ .debug_line    0x00003aff      0xf62 src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+ .debug_line    0x00004a61      0xb37 src/ASF/sam0/drivers/sercom/sercom.o
+ .debug_line    0x00005598      0xacc src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+ .debug_line    0x00006064     0x12fb src/ASF/sam0/drivers/sercom/spi/spi.o
+ .debug_line    0x0000735f      0xcb0 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
+ .debug_line    0x0000800f      0xd25 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
+ .debug_line    0x00008d34      0xa03 src/ASF/sam0/drivers/tc/tc_interrupt.o
+ .debug_line    0x00009737      0x88c src/ASF/sam0/drivers/port/port.o
+ .debug_line    0x00009fc3      0xd30 src/ASF/common2/boards/user_board/init.o
+ .debug_line    0x0000acf3      0x860 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_line    0x0000b553      0xc49 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/clock.o
+ .debug_line    0x0000c19c      0xc09 src/ASF/sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.o
+ .debug_line    0x0000cda5      0x8d9 src/ASF/sam0/drivers/system/pinmux/pinmux.o
+ .debug_line    0x0000d67e      0x980 src/ASF/sam0/drivers/system/system.o
+ .debug_line    0x0000dffe      0x5dc src/ASF/sam0/utils/cmsis/samd10/source/gcc/startup_samd10.o
+ .debug_line    0x0000e5da      0x40a src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_line    0x0000e9e4      0xd79 src/LEDMatrixBluetoothMode.o
+ .debug_line    0x0000f75d      0xf00 src/LEDMatrixControl.o
+ .debug_line    0x0001065d      0xe68 src/LEDMatrixI2CSlave.o
+ .debug_line    0x000114c5      0xee1 src/LEDMatrixMultiplyMode.o
+ .debug_line    0x000123a6      0xee2 src/LEDMatrixReadDial.o
+ .debug_line    0x00013288      0xe14 src/LEDMatrixSPIControl.o
+ .debug_line    0x0001409c      0xe29 src/LEDMatrixSPIMaster.o
+ .debug_line    0x00014ec5      0xf25 src/LEDMatrixUtilities.o
+ .debug_line    0x00015dea      0xe12 src/main.o
 
-.debug_str      0x00000000    0x71352
+.debug_str      0x00000000    0x71371
  .debug_str     0x00000000    0x6629f src/ASF/common2/services/delay/sam0/systick_counter.o
                               0x66790 (size before relaxing)
  .debug_str     0x0006629f     0x1d27 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
@@ -7971,23 +8008,23 @@ OUTPUT(LEDMatrixFlutter.elf elf32-littlearm)
                               0x67fcb (size before relaxing)
  .debug_str     0x00069372     0x13dd src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave.o
                               0x68853 (size before relaxing)
- .debug_str     0x0006a74f      0x25e src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
-                              0x67a54 (size before relaxing)
- .debug_str     0x0006a9ad      0x353 src/ASF/sam0/drivers/sercom/sercom.o
+ .debug_str     0x0006a74f     0x105c src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
+                              0x68f9f (size before relaxing)
+ .debug_str     0x0006b7ab      0x353 src/ASF/sam0/drivers/sercom/sercom.o
                               0x679a4 (size before relaxing)
- .debug_str     0x0006ad00      0x158 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+ .debug_str     0x0006bafe      0x158 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
                               0x6771c (size before relaxing)
- .debug_str     0x0006ae58      0xbae src/ASF/sam0/drivers/sercom/spi/spi.o
+ .debug_str     0x0006bc56      0xa89 src/ASF/sam0/drivers/sercom/spi/spi.o
                               0x68ce5 (size before relaxing)
- .debug_str     0x0006ba06      0x184 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
+ .debug_str     0x0006c6df      0x16a src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
                               0x67c73 (size before relaxing)
- .debug_str     0x0006bb8a      0xaf3 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
+ .debug_str     0x0006c849      0x833 src/ASF/sam0/drivers/tc/tc_sam_d_r_h/tc.o
                               0x67b6b (size before relaxing)
- .debug_str     0x0006c67d       0xe5 src/ASF/sam0/drivers/tc/tc_interrupt.o
+ .debug_str     0x0006d07c       0xe5 src/ASF/sam0/drivers/tc/tc_interrupt.o
                               0x67289 (size before relaxing)
- .debug_str     0x0006c762      0x118 src/ASF/sam0/drivers/port/port.o
+ .debug_str     0x0006d161      0x118 src/ASF/sam0/drivers/port/port.o
                               0x66997 (size before relaxing)
- .debug_str     0x0006c87a      0xa3d src/ASF/common2/boards/user_board/init.o
+ .debug_str     0x0006d279       0x3e src/ASF/common2/boards/user_board/init.o
                               0x6858d (size before relaxing)
  .debug_str     0x0006d2b7       0x66 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
                               0x66580 (size before relaxing)
@@ -8005,24 +8042,24 @@ OUTPUT(LEDMatrixFlutter.elf elf32-littlearm)
                                0x7265 (size before relaxing)
  .debug_str     0x000703db       0xac src/LEDMatrixBluetoothMode.o
                               0x685fb (size before relaxing)
- .debug_str     0x00070487      0x58b src/LEDMatrixControl.o
-                              0x69d8d (size before relaxing)
- .debug_str     0x00070a12      0x1ce src/LEDMatrixI2CSlave.o
-                              0x69ad1 (size before relaxing)
- .debug_str     0x00070be0      0x1f4 src/LEDMatrixMultiplyMode.o
-                              0x68cf5 (size before relaxing)
- .debug_str     0x00070dd4      0x1e1 src/LEDMatrixReadDial.o
-                              0x69b03 (size before relaxing)
- .debug_str     0x00070fb5       0x84 src/LEDMatrixSPIControl.o
+ .debug_str     0x00070487      0x56e src/LEDMatrixControl.o
+                              0x69b7d (size before relaxing)
+ .debug_str     0x000709f5      0x202 src/LEDMatrixI2CSlave.o
+                              0x69d28 (size before relaxing)
+ .debug_str     0x00070bf7      0x1f4 src/LEDMatrixMultiplyMode.o
+                              0x68ce5 (size before relaxing)
+ .debug_str     0x00070deb      0x1ee src/LEDMatrixReadDial.o
+                              0x69d43 (size before relaxing)
+ .debug_str     0x00070fd9       0x84 src/LEDMatrixSPIControl.o
                               0x68a50 (size before relaxing)
- .debug_str     0x00071039      0x1ac src/LEDMatrixSPIMaster.o
+ .debug_str     0x0007105d      0x1ac src/LEDMatrixSPIMaster.o
                               0x6a396 (size before relaxing)
- .debug_str     0x000711e5      0x15a src/LEDMatrixUtilities.o
+ .debug_str     0x00071209      0x15a src/LEDMatrixUtilities.o
                               0x686e8 (size before relaxing)
- .debug_str     0x0007133f       0x13 src/main.o
-                              0x68dbd (size before relaxing)
+ .debug_str     0x00071363        0xe src/main.o
+                              0x68dc7 (size before relaxing)
 
-.debug_frame    0x00000000     0x14a8
+.debug_frame    0x00000000     0x14d8
  .debug_frame   0x00000000       0x64 src/ASF/common2/services/delay/sam0/systick_counter.o
  .debug_frame   0x00000064       0x98 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc.o
  .debug_frame   0x000000fc       0x84 src/ASF/sam0/drivers/adc/adc_sam_d_r_h/adc_callback.o
@@ -8046,23 +8083,23 @@ OUTPUT(LEDMatrixFlutter.elf elf32-littlearm)
  .debug_frame   0x00000cd8       0xa0 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .debug_frame   0x00000d78       0x2c src/LEDMatrixBluetoothMode.o
  .debug_frame   0x00000da4       0xf4 src/LEDMatrixControl.o
- .debug_frame   0x00000e98       0x9c src/LEDMatrixI2CSlave.o
- .debug_frame   0x00000f34      0x118 src/LEDMatrixMultiplyMode.o
- .debug_frame   0x0000104c       0x98 src/LEDMatrixReadDial.o
- .debug_frame   0x000010e4       0x84 src/LEDMatrixSPIControl.o
- .debug_frame   0x00001168       0xa0 src/LEDMatrixSPIMaster.o
- .debug_frame   0x00001208       0x84 src/LEDMatrixUtilities.o
- .debug_frame   0x0000128c       0x58 src/main.o
- .debug_frame   0x000012e4       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m\libgcc.a(_udivsi3.o)
- .debug_frame   0x00001304       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m\libgcc.a(_divsi3.o)
- .debug_frame   0x00001324       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-init.o)
- .debug_frame   0x00001350       0x40 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-malloc.o)
- .debug_frame   0x00001390       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x000013b8       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-memset.o)
- .debug_frame   0x000013d8       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-nano-mallocr.o)
- .debug_frame   0x00001404       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-sbrkr.o)
- .debug_frame   0x00001430       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-mlock.o)
- .debug_frame   0x00001460       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-reent.o)
+ .debug_frame   0x00000e98       0xcc src/LEDMatrixI2CSlave.o
+ .debug_frame   0x00000f64      0x118 src/LEDMatrixMultiplyMode.o
+ .debug_frame   0x0000107c       0x98 src/LEDMatrixReadDial.o
+ .debug_frame   0x00001114       0x84 src/LEDMatrixSPIControl.o
+ .debug_frame   0x00001198       0xa0 src/LEDMatrixSPIMaster.o
+ .debug_frame   0x00001238       0x84 src/LEDMatrixUtilities.o
+ .debug_frame   0x000012bc       0x58 src/main.o
+ .debug_frame   0x00001314       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m\libgcc.a(_udivsi3.o)
+ .debug_frame   0x00001334       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m\libgcc.a(_divsi3.o)
+ .debug_frame   0x00001354       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-init.o)
+ .debug_frame   0x00001380       0x40 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-malloc.o)
+ .debug_frame   0x000013c0       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x000013e8       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-memset.o)
+ .debug_frame   0x00001408       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x00001434       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x00001460       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-mlock.o)
+ .debug_frame   0x00001490       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m\libc_nano.a(lib_a-reent.o)
 
 Cross Reference Table
 
@@ -8291,7 +8328,7 @@ cpu_irq_leave_critical                            src/ASF/common/utils/interrupt
                                                   src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave.o
                                                   src/ASF/sam0/drivers/dma/dma.o
 delay_cycles_ms                                   src/ASF/common2/services/delay/sam0/systick_counter.o
-                                                  src/main.o
+                                                  src/LEDMatrixI2CSlave.o
 delay_cycles_us                                   src/ASF/common2/services/delay/sam0/systick_counter.o
                                                   src/main.o
                                                   src/LEDMatrixSPIControl.o
@@ -8302,6 +8339,9 @@ descriptor_section                                src/ASF/sam0/drivers/dma/dma.o
 dialConvertValueColumn                            src/LEDMatrixMultiplyMode.o
 dialConvertValueRow                               src/LEDMatrixMultiplyMode.o
 dialOutputs                                       src/main.o
+                                                  src/LEDMatrixReadDial.o
+                                                  src/LEDMatrixMultiplyMode.o
+                                                  src/LEDMatrixI2CSlave.o
 dma_abort_job                                     src/ASF/sam0/drivers/dma/dma.o
 dma_add_descriptor                                src/ASF/sam0/drivers/dma/dma.o
                                                   src/LEDMatrixSPIMaster.o
@@ -8331,6 +8371,7 @@ g_chan_interrupt_flag                             src/ASF/sam0/drivers/dma/dma.o
                                                   src/LEDMatrixSPIMaster.o
 g_interrupt_enabled                               src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
 hardware_init_hook                                c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
+i2c_error_handler_callback                        src/LEDMatrixI2CSlave.o
 i2c_read_complete_callback                        src/LEDMatrixI2CSlave.o
 i2c_read_request_callback                         src/LEDMatrixI2CSlave.o
 i2c_slave_clear_status                            src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave.o
@@ -8351,6 +8392,8 @@ i2c_slave_unregister_callback                     src/ASF/sam0/drivers/sercom/i2
 i2c_slave_write_packet_job                        src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave_interrupt.o
                                                   src/LEDMatrixI2CSlave.o
 i2c_slave_write_packet_wait                       src/ASF/sam0/drivers/sercom/i2c/i2c_sam0/i2c_slave.o
+i2c_update_sensors_values                         src/LEDMatrixI2CSlave.o
+                                                  src/LEDMatrixReadDial.o
 i2c_write_complete_callback                       src/LEDMatrixI2CSlave.o
 i2c_write_request_callback                        src/LEDMatrixI2CSlave.o
 initLEDMatrixTimer                                src/LEDMatrixControl.o
@@ -8374,10 +8417,12 @@ memset                                            c:/program files (x86)/atmel/s
                                                   c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
 minCThresh                                        src/LEDMatrixMultiplyMode.o
 minRThresh                                        src/LEDMatrixMultiplyMode.o
+packet                                            src/LEDMatrixI2CSlave.o
 port_group_set_config                             src/ASF/sam0/drivers/port/port.o
 port_pin_set_config                               src/ASF/sam0/drivers/port/port.o
                                                   src/LEDMatrixSPIControl.o
                                                   src/LEDMatrixControl.o
+rd_packet                                         src/LEDMatrixI2CSlave.o
 readDials                                         src/LEDMatrixReadDial.o
                                                   src/main.o
 refreshLEDArray                                   src/LEDMatrixMultiplyMode.o
@@ -8489,8 +8534,9 @@ tc_set_top_value                                  src/ASF/sam0/drivers/tc/tc_sam
 tc_unregister_callback                            src/ASF/sam0/drivers/tc/tc_interrupt.o
 test                                              src/main.o
 testFunction                                      src/LEDMatrixUtilities.o
-testLogDialL                                      src/LEDMatrixReadDial.o
+                                                  src/main.o
 testPinsInit                                      src/LEDMatrixControl.o
+                                                  src/main.o
 transferDone                                      src/main.o
                                                   src/LEDMatrixSPIMaster.o
 update2ShiftResgisterFormat                       src/LEDMatrixMultiplyMode.o
@@ -8502,10 +8548,4 @@ updateMatrixMultiplyMode                          src/LEDMatrixMultiplyMode.o
                                                   src/LEDMatrixControl.o
 updateSPIValues                                   src/LEDMatrixControl.o
 useDialLValue                                     src/main.o
-                                                  src/LEDMatrixReadDial.o
-                                                  src/LEDMatrixMultiplyMode.o
-                                                  src/LEDMatrixI2CSlave.o
 useDialRValue                                     src/main.o
-                                                  src/LEDMatrixReadDial.o
-                                                  src/LEDMatrixMultiplyMode.o
-                                                  src/LEDMatrixI2CSlave.o

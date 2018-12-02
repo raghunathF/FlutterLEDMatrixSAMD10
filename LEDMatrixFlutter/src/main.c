@@ -50,6 +50,7 @@ volatile uint8_t     RMatrix[4][8];
 volatile uint8_t     GMatrix[4][8];
 volatile uint8_t     BMatrix[4][8];
 volatile uint8_t     dialOutputs[2];
+
 uint8_t I2CReadBuffer[DATA_LENGTH_LEDS];
 
 volatile bool I2CReadComplete = false;
@@ -85,23 +86,24 @@ int main (void)
 
 	system_init();
 	delay_init();
+	configDials();
 	
 	configure_i2c_slave();
 	configure_i2c_slave_callbacks();
-	//testFunction();
+	testFunction();
 	
 	LEDMatrixTimerInit();
-	//testPinsInit();
+	testPinsInit();
 	LEDMatrixInit();
 	SPIMasterInit();
-	configDials();
+	
 	
 	LEDMatrixMode = 1;
 	while(1)
 	{
 		readDials();
 		LEDMatrixControl();
-		delay_ms(1);
+		//delay_ms(20);
 		/*
 		for(j=2;j<5;j++)
 		{

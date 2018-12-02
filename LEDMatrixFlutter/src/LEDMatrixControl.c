@@ -75,7 +75,7 @@ void updateLEDMatrix()
 {
 	
 	updateLEDRows = true;
-	port_pin_toggle_output_level(TP1);
+	//port_pin_toggle_output_level(TP1);
 	//updateSPIValues();
 }
 

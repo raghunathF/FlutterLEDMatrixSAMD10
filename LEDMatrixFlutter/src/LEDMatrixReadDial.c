@@ -6,6 +6,7 @@
  */ 
 #include <asf.h>
 #include "LEDMatrixReadDial.h"
+#include "LEDMatrixI2CSlave.h"
 
 #define  DIAL_THRESHOLD				2
 #define  NUMBER_COUNT_THRESHOLD		3
@@ -15,14 +16,14 @@
 
 uint16_t* ADCResult = NULL;
 
-uint16_t testLogDialL[500];
+//uint16_t testLogDialL[500];
 //uint16_t testLogDialR[500];
 
-extern uint16_t useDialLValue ;
-extern uint16_t useDialRValue ;
+static uint16_t useDialLValue ;
+static uint16_t useDialRValue ;
 
 extern volatile bool sensorsUpdate;
-extern volatile uint8_t dialOutputs[2];
+extern  uint8_t dialOutputs[2];
 
 struct adc_module adc_instance;
 
@@ -60,7 +61,7 @@ uint16_t adc_start_read_result(const enum adc_positive_input analogPin)
 	return temp;
 }
 
-void filterDialValues(uint16_t dialLValue , uint16_t dialRValue)
+void filterDialValues(uint8_t dialLValue , uint8_t dialRValue)
 {
 	static uint16_t dialLValueInf   = 0 ;
 	static uint16_t dialRValueInf	= 0 ;
@@ -90,13 +91,13 @@ void filterDialValues(uint16_t dialLValue , uint16_t dialRValue)
 		if(countThresholdL > NUMBER_COUNT_THRESHOLD)
 		{
 			countThresholdL = 0;
-			useDialLValue = dialLValueInf;
+			useDialLValue = (uint8_t)dialLValueInf;
 			
 		}
 	}
 	else
 	{
-		useDialLValue = dialLValueInf;
+		useDialLValue = (uint8_t)dialLValueInf;
 		countThresholdL = 0;
 	}
 	
@@ -106,13 +107,13 @@ void filterDialValues(uint16_t dialLValue , uint16_t dialRValue)
 		if(countThresholdR > NUMBER_COUNT_THRESHOLD)
 		{
 			countThresholdR = 0;
-			useDialRValue = dialRValueInf;
+			useDialLValue = (uint8_t)dialRValueInf;
 			
 		}
 	}
 	else
 	{
-		useDialRValue = dialRValueInf;
+		useDialRValue = (uint8_t)dialRValueInf;
 		countThresholdR = 0;
 	}
 	
@@ -125,17 +126,29 @@ void readDials()
 	
 	uint16_t dialLValue = 0;
 	uint16_t dialRValue = 0;
-	
+	static uint8_t tempCount = 0;
+	tempCount++;
+	if(tempCount >200)
+	{
+		tempCount = 0;
+	}
 	dialLValue		= adc_start_read_result(DIAL_L_ANALOG_CHANNEL);
 	dialRValue		= adc_start_read_result(DIAL_R_ANALOG_CHANNEL);
 	
 	sensorsUpdate  = true;
 	filterDialValues(dialLValue,dialRValue);
-	
+	dialOutputs[0]  = (useDialLValue & 0xF0) >>4;
+	dialOutputs[1]  = (useDialLValue & 0x0F);
+	dialOutputs[2]  = (useDialRValue & 0xF0) >>4;
+	dialOutputs[3]  = (useDialRValue & 0x0F);
+	port_pin_set_output_level(TP1 , true);
+	//dialOutputs[0]  = tempCount;
+	//dialOutputs[1]  = tempCount+1;
+	i2c_update_sensors_values();
+	port_pin_set_output_level(TP1 , false);
 	//dialUpdate  = true;
 	//dialUpdate  = false;
-	
-	testLogDialL[testCount] = useDialRValue;
+	//testLogDialL[testCount] = useDialRValue;
 	sensorsUpdate = false;
 	//testLogDialR[testCount] = useDialRValue;
 	testCount++;

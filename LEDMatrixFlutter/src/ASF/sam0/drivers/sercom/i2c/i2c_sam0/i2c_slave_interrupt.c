@@ -45,6 +45,7 @@
  */
 
 #include "i2c_slave_interrupt.h"
+#include "asf.h"
 
 /**
  * \brief Enables sending of NACK on address match
@@ -243,7 +244,8 @@ enum status_code i2c_slave_write_packet_job(
 	if (module->buffer_remaining > 0) {
 		return STATUS_BUSY;
 	}
-
+	
+	
 	/* Save packet to software module. */
 	module->buffer           = packet->data;
 	module->buffer_remaining = packet->data_length;
@@ -374,6 +376,7 @@ void _i2c_slave_interrupt_handler(
 			module->status = STATUS_OK;
 			module->buffer_length = 0;
 			module->buffer_remaining = 0;
+			
 
 			/* Call appropriate callback if enabled and registered */
 			if ((callback_mask & (1 << I2C_SLAVE_CALLBACK_READ_COMPLETE))
@@ -395,7 +398,9 @@ void _i2c_slave_interrupt_handler(
 
 			module->buffer_remaining = 0;
 			module->buffer_length = 0;
-
+			
+			
+			
 			if (module->transfer_direction == I2C_TRANSFER_WRITE) {
 				/* Buffer is full, send NACK, workaround 13574 */
 				_i2c_slave_set_ctrlb_ackact(module, false);
