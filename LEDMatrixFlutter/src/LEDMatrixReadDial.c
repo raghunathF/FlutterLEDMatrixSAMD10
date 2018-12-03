@@ -107,7 +107,7 @@ void filterDialValues(uint8_t dialLValue , uint8_t dialRValue)
 		if(countThresholdR > NUMBER_COUNT_THRESHOLD)
 		{
 			countThresholdR = 0;
-			useDialLValue = (uint8_t)dialRValueInf;
+			useDialRValue = (uint8_t)dialRValueInf;
 			
 		}
 	}
@@ -137,10 +137,13 @@ void readDials()
 	
 	sensorsUpdate  = true;
 	filterDialValues(dialLValue,dialRValue);
+	//dialOutputs[3]  = 0xF0;
+	
 	dialOutputs[0]  = (useDialLValue & 0xF0) >>4;
 	dialOutputs[1]  = (useDialLValue & 0x0F);
 	dialOutputs[2]  = (useDialRValue & 0xF0) >>4;
 	dialOutputs[3]  = (useDialRValue & 0x0F);
+
 	port_pin_set_output_level(TP1 , true);
 	//dialOutputs[0]  = tempCount;
 	//dialOutputs[1]  = tempCount+1;

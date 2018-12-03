@@ -8044,10 +8044,10 @@ void filterDialValues(uint8_t dialLValue , uint8_t dialRValue)
     2800:	2100      	movs	r1, #0
     2802:	4b0e      	ldr	r3, [pc, #56]	; (283c <filterDialValues+0xf0>)
     2804:	8019      	strh	r1, [r3, #0]
-			useDialLValue = (uint8_t)dialRValueInf;
+			useDialRValue = (uint8_t)dialRValueInf;
     2806:	23ff      	movs	r3, #255	; 0xff
     2808:	401a      	ands	r2, r3
-    280a:	4b08      	ldr	r3, [pc, #32]	; (282c <filterDialValues+0xe0>)
+    280a:	4b09      	ldr	r3, [pc, #36]	; (2830 <filterDialValues+0xe4>)
     280c:	801a      	strh	r2, [r3, #0]
     280e:	e006      	b.n	281e <filterDialValues+0xd2>
 			
@@ -8120,6 +8120,8 @@ void readDials()
     2866:	b2e8      	uxtb	r0, r5
     2868:	4b19      	ldr	r3, [pc, #100]	; (28d0 <readDials+0x90>)
     286a:	4798      	blx	r3
+	//dialOutputs[3]  = 0xF0;
+	
 	dialOutputs[0]  = (useDialLValue & 0xF0) >>4;
     286c:	4b19      	ldr	r3, [pc, #100]	; (28d4 <readDials+0x94>)
     286e:	8819      	ldrh	r1, [r3, #0]
@@ -8149,6 +8151,7 @@ void readDials()
     288c:	4d14      	ldr	r5, [pc, #80]	; (28e0 <readDials+0xa0>)
     288e:	2610      	movs	r6, #16
     2890:	61ae      	str	r6, [r5, #24]
+
 	port_pin_set_output_level(TP1 , true);
 	//dialOutputs[0]  = tempCount;
 	//dialOutputs[1]  = tempCount+1;
